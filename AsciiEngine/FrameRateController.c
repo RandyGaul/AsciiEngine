@@ -107,7 +107,7 @@ int FPSLimit( millisecond FPS )
 		DRAW
 	};
 
-	if (timeGetTime( ) - timeAtFrameStart > FPS) // If we are not over our threshold
+	if (timeGetTime( ) - timeAtFrameStart < FPS) // If we are not over our threshold
 	{
 		return DONTDRAW;
 	}

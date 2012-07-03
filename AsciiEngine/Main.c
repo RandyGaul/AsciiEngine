@@ -23,7 +23,7 @@ int main(void)
   // though you can try strings "Lucida Console" or "Consolas" as they are
   // optional fonts in Windows 7 and Vista. A custom font can be created and
   // implemented if you're so inclined.
-  initConsole(TEXT("AsciiEngine V1.00"), TEXT(""), 8, 8, 75, 35);
+  initConsole(TEXT("AsciiEngine V1.00"), TEXT(""), 8, 8, 70, 30);
 
   // Seed PRNG
   // http://cecilsunkure.blogspot.com/2010/11/prngs-psuedo-random-number-generator.html
@@ -65,7 +65,7 @@ int main(void)
 				SetDT( dtCalculate( ) ); // Set's dt for the function GetDT
 				Update( ); // calculate change in time since last call, for update
 				DebounceAllKeys( );
-				if (FPSLimit( FPS_LIMIT_IN_MILLISECONDS ))
+				if (FPSLimit( TIME_BETWEEN_FRAMES_IN_MILLISECONDS ))
 				{
 					Draw( );
 					break;

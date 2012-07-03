@@ -13,7 +13,7 @@
 #include <windows.h>
 
 #define DT_MAX 60.0f
-#define FPS_LIMIT_IN_MILLISECONDS 6000
+#define TIME_BETWEEN_FRAMES_IN_MILLISECONDS 32
 
 #define TRUE 1
 #define FALSE 0
