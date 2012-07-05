@@ -14,6 +14,15 @@
 // Object headers
 #include "RedSquare.h"
 
+//
+// The object factory allows easy handling of creation,
+// deletion, updating, initializing, and drawing of all
+// game objects. Simply include ObjectFactory.h to start
+// creating your objects from a state file.
+// Additional documentation on how object oriented C
+// works: http://cecilsunkure.blogspot.com/2012/04/object-oriented-c-class-like-structures.html
+//
+
 // Start of linked list of objects.
 // Linked list documentation: http://cecilsunkure.blogspot.com/2010/11/memory-allocation-and-linked-lists.html
 GAMEOBJECT_NODE *OBJECT_LIST = NULL;

@@ -10,20 +10,16 @@
 #ifndef OBJECTFACTORYH
 #define OBJECTFACTORYH
 
+//
+// The object factory allows easy handling of creation,
+// deletion, updating, initializing, and drawing of all
+// game objects. Simply include ObjectFactory.h to start
+// creating your objects from a state file.
+// Additional documentation on how object oriented C
+// works: http://cecilsunkure.blogspot.com/2012/04/object-oriented-c-class-like-structures.html
+//
+
 #include "GameObject.h"
-
-// Macros that simply make maintainance in ObjectFactory.c easier
-#define DRAW_TYPECAST( pointer, type ) \
-  (((type *)(pointer))->vtable->Draw( (type *)pointer ))
-
-#define DESTROY_TYPECAST( pointer, type ) \
-  (((type *)(pointer))->vtable->Destroy( (type *)pointer ))
-
-#define UPDATE_TYPECAST( pointer, type ) \
-  (((type *)(pointer))->vtable->Update( (type *)pointer ))
-
-#define INIT_TYPECAST( pointer, type ) \
-  (((type *)(pointer))->vtable->Init( (type *)pointer ))
 
 //
 // AE_CreateObject
