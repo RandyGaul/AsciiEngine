@@ -37,7 +37,7 @@ BOOL isTableFull = FALSE;
 
 // Attempt to insert an entry into the table
 // Will fail if no room or a duplicate key is found.
-RETURN_TYPE InsertEntry( IMAGE *image )
+RETURN_TYPE AE_LoadImage( IMAGE *image )
 {
   // Retrieve hashed index from string
   unsigned index = UHashMod( image->ID );
@@ -105,7 +105,7 @@ unsigned UHashMod( const char *Key )
 // Instead of linearly searching, or doing a binary search in an ordered array,
 // you can use a hash function to generate an index and subsequently cut down
 // searh complexity to O(1 + nlk). Returns NULL if string is not found.
-IMAGE *TableLookup( const char *Key )
+IMAGE *AE_FindImage( const char *Key )
 {
   unsigned index = UHashMod( Key );
   unsigned indexStart = index;
@@ -140,7 +140,7 @@ IMAGE *TableLookup( const char *Key )
 }
 
 // Attempts to mark an entry as deleted
-RETURN_TYPE DeleteEntry( char *Key )
+RETURN_TYPE AE_DeleteImage( char *Key )
 {
   unsigned index = UHashMod( Key );
   unsigned indexStart = index;

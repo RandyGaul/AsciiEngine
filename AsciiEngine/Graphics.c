@@ -106,7 +106,7 @@ IMAGE *AllocateImage( const char *string, int width, int height )
   ZeroImage( image );
 
   // Insert the image into the hash table of images  
-  InsertEntry( image );
+  AE_LoadImage( image );
 
   return image;
 }
@@ -116,7 +116,7 @@ IMAGE *AllocateImage( const char *string, int width, int height )
 // was not found.
 RETURN_TYPE DeallocateImage( const char *imageID )
 {
-  IMAGE *image = TableLookup( imageID );
+  IMAGE *image = AE_FindImage( imageID );
 
   if(!image)
   {
@@ -130,11 +130,28 @@ RETURN_TYPE DeallocateImage( const char *imageID )
 // This is called once to initialize the graphics system.
 void InitGraphics( int width, int height )
 {
+  // Setup various images in memory for use throughout the program
+  CHAR charArray2[3 * 3] = {
+    0xDB, 0xDB, 0xDB,
+    0xDB, 0xDB, 0xDB,
+    0xDB, 0xDB, 0xDB,
+  };
+  COL colorArray2[3 * 3] = {
+    0x04, 0x04, 0x04,
+    0x04, 0x04, 0x04,
+    0x04, 0x04, 0x04,
+  };
+  IMAGE *image2;
+
   // Create the double buffer in memory, zero it, and set the BUFFER constants
   DOUBLE_BUFFER = (CHAR_INFO *)malloc( sizeof( CHAR_INFO ) * width * height );
   memset( DOUBLE_BUFFER, '\0', sizeof( CHAR_INFO ) * width * height );
   BUFFERHEIGHT = height;
   BUFFERWIDTH = width;
+
+  // Load all the various images used throughout the project
+  image2 = AllocateImage( "REDSQUARE", 3, 3 );
+  ImageSet( image2, charArray2, colorArray2 );
 }
 
 // Checks to make sure a coordinate is within the boundaries of the screen or not
@@ -148,7 +165,7 @@ BOOL ScreenBoundCheck( int x, int y )
 RETURN_TYPE WriteImageToScreen( const char *imageID, int xoffset, int yoffset )
 {
   int x, y;
-  IMAGE *image = TableLookup( imageID ); // Get image pointer
+  IMAGE *image = AE_FindImage( imageID ); // Get image pointer
 
   // Return failure if image not found in lookup
   if(!image)

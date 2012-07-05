@@ -22,7 +22,7 @@ HANDLE INPUT_HANDLE; /* read (input handle */
 
   Initializes various aspects of the console.
 ******************************************************************************/
-void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty, int bufferWidth, int bufferHeight)
+void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty )
 {
   // Used to center the window on the user's screen
   int x = GetSystemMetrics(SM_CXSCREEN) / 2;
@@ -40,10 +40,10 @@ void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty,
     /* Search MSDN for the RGB macro to easily generate COLORREF values */
     
   /* Window size coordinates, be sure to start index at zero! */
-  SMALL_RECT windowSize = {0, 0, bufferWidth - 1, bufferHeight - 1};
+  SMALL_RECT windowSize = {0, 0, BUFFERWIDTH - 1, BUFFERHEIGHT - 1};
 
   /* A COORD struct for specificying the console's screen buffer dimensions */
-  COORD bufferSize = {bufferWidth, bufferHeight};
+  COORD bufferSize = {BUFFERWIDTH, BUFFERHEIGHT};
   
   CONSOLE_CURSOR_INFO cursorInfo = {1, 0};
 
@@ -54,8 +54,6 @@ void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty,
   /* initialize handles */
   OUTPUT_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
   INPUT_HANDLE = GetStdHandle(STD_INPUT_HANDLE);
-
-  InitGraphics( bufferWidth, bufferHeight );
 
   /* Set the console's title */
   SetConsoleTitle((LPCWSTR)title);
@@ -73,7 +71,7 @@ void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty,
   SetConsoleScreenBufferSize(wHnd, bufferSize);
   
   /* Set the window position */
-  SetWindowPos(hwnd, HWND_TOP, (x - ((bufferWidth / 2) * fontx)) - 5, (y - ((bufferHeight / 2) * fonty)) - 5, 0, 0, SWP_NOSIZE);
+  SetWindowPos(hwnd, HWND_TOP, (x - ((BUFFERWIDTH / 2) * fontx)) - 5, (y - ((BUFFERHEIGHT / 2) * fonty)) - 5, 0, 0, SWP_NOSIZE);
 }
 
 /******************************************************************************

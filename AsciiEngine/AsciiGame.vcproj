@@ -115,7 +115,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -247,6 +247,58 @@
 				</File>
 				<File
 					RelativePath=".\StringHash.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="GameObjects"
+				>
+				<File
+					RelativePath=".\GameObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ObjectFactory.c"
+					>
+				</File>
+				<File
+					RelativePath=".\ObjectFactory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RedSquare.c"
+					>
+				</File>
+				<File
+					RelativePath=".\RedSquare.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Shapes.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="VectorLib"
+				>
+				<File
+					RelativePath=".\Vector2D.c"
+					>
+				</File>
+				<File
+					RelativePath=".\Vector2D.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="MathLib"
+				>
+				<File
+					RelativePath=".\Math2D.c"
+					>
+				</File>
+				<File
+					RelativePath=".\Math2D.h"
 					>
 				</File>
 			</Filter>

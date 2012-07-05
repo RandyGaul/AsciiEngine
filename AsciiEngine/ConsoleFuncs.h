@@ -90,5 +90,5 @@ BOOL SetConsoleInfo(HWND hwndConsole, CONSOLE_INFO *pci);
 VOID WINAPI SetConsolePalette(COLORREF palette[], int fontX, int fontY, wchar_t *fontName);
 static void GetConsoleSizeInfo(CONSOLE_INFO *pci, HANDLE hOutput);
 int windowsVersionTest(void);
-void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty, int bufferWidth, int bufferHeight);
+void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty);
 void RenderScreen( void );

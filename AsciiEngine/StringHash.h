@@ -17,8 +17,8 @@
 #include "GlobalDefines.h"
 
 unsigned UHashMod( const char *Key );
-IMAGE *TableLookup( const char *Key );
-RETURN_TYPE InsertEntry( IMAGE *image );
-RETURN_TYPE DeleteEntry( char *Key );
+IMAGE *AE_FindImage( const char *Key );
+RETURN_TYPE AE_LoadImage( IMAGE *image );
+RETURN_TYPE AE_DeleteImage( char *Key );
 
 #endif  STRINGHASHH

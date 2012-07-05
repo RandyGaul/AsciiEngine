@@ -23,12 +23,11 @@
 #include "ConsoleFuncs.h"
 #include "FrameRateController.h"
 
-int MainMenuLoad( void )
-{
-	return RETURN_SUCCESS;
-}
+// Allows for management of GameObjects without including
+// all the various game object headers to this file
+#include "ObjectFactory.h"
 
-int MainMenuInitialize( void )
+int MainMenuLoad( void )
 {
   // Allocate space for an image
   IMAGE *image = AllocateImage( "TestSun", 15, 15 );
@@ -71,6 +70,17 @@ int MainMenuInitialize( void )
 
   // Apply the image data to a specific image
   ImageSet( image, charArray, colorArray );
+
+  AE_CreateObject( GO_REDSQUARE );
+	return RETURN_SUCCESS;
+}
+
+int MainMenuInitialize( void )
+{
+  // Run the default initializer on all objects, any custom
+  // initialization of an object will use the object's set
+  // function, and should be done after this function call.
+  AE_InitObjects( );
 	return RETURN_SUCCESS;
 }
 
@@ -78,6 +88,9 @@ int MainMenuUpdate( void )
 {
   // You should use dt in this form whenever you require it
   float dt = GetDT( );
+
+  // Run all objects' update functions.
+  AE_UpdateObjects( );
 
   // Demonstration of how to draw an image to the DOUBLE_BUFFER
   // Note that the image will not be rendered to the screen unless RenderScreen
@@ -92,6 +105,7 @@ int MainMenuUpdate( void )
 
 int MainMenuDraw( )
 {
+  AE_DrawObjects( );
   // Renders the double buffer to the screen, only call this once per game loop!
   RenderScreen( );
 	return RETURN_SUCCESS;

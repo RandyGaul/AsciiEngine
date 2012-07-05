@@ -9,6 +9,7 @@
 
 #include "GlobalDefines.h"
 #include "ConsoleFuncs.h"
+#include "Graphics.h"
 #include "GameStateManager.h"
 #include "FrameRateController.h"
 #include "Input.h"
@@ -16,14 +17,16 @@
 
 int main(void)
 {
-  // Various initialization tasks such as graphics, setting up
-  // the windows console, etc.
+  // Initializes the graphics settings.
+  InitGraphics( 70, 30 );
+
+  // Initializes the console.
   // The first string is the name of your window. The second string is the
   // name of the font you want to use. Blank uses the default raster font,
   // though you can try strings "Lucida Console" or "Consolas" as they are
   // optional fonts in Windows 7 and Vista. A custom font can be created and
   // implemented if you're so inclined.
-  initConsole(TEXT("AsciiEngine V1.00"), TEXT(""), 8, 8, 70, 30);
+  initConsole(TEXT("AsciiEngine V1.00"), TEXT(""), 8, 8 );
 
   // Seed PRNG
   // http://cecilsunkure.blogspot.com/2010/11/prngs-psuedo-random-number-generator.html
