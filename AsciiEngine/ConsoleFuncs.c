@@ -69,6 +69,9 @@ void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty 
   
   /* Set the screen's buffer size */
   SetConsoleScreenBufferSize(wHnd, bufferSize);
+
+  /* Set the window size */
+  SetConsoleWindowInfo(OUTPUT_HANDLE, TRUE, &windowSize);
   
   /* Set the window position */
   SetWindowPos(hwnd, HWND_TOP, (x - ((BUFFERWIDTH / 2) * fontx)) - 5, (y - ((BUFFERHEIGHT / 2) * fonty)) - 5, 0, 0, SWP_NOSIZE);
