@@ -58,6 +58,17 @@ int MainMenuUpdate( void )
 int MainMenuDraw( )
 {
   DrawMap( ); // draws tiles
+
+  // Demonstration of mouse input
+  if(IsKeyPressed( VK_LBUTTON ))
+  {
+    WriteImageToScreen( "WhiteTile", GLOBAL_INPUTS.xPosAtLastLeftClick, GLOBAL_INPUTS.yPosAtLastLeftClick );
+  }
+  if(IsKeyPressed( VK_RBUTTON ))
+  {
+    WriteImageToScreen( "BlueTile", GLOBAL_INPUTS.xPosAtLastRightClick, GLOBAL_INPUTS.yPosAtLastRightClick );
+  }
+
   AE_DrawObjects( ); // draws all active objects
   // Renders the double buffer to the screen, only call this once per game loop!
   RenderScreen( );

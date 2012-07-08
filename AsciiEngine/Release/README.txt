@@ -1,4 +1,5 @@
 Demo instructions:
 Double click on AsciiEngine.exe
-Hit arrow keys to see demonstration of using the object factory to create an interactive object.
-Hit enter to see demonstration of the graphics functionality.
+A red square object is created with the object factory as a demonstration.
+Hit arrow keys to see demonstration of implementation of the red square object.
+Hold left mouse button or right mouse button to see demonstration of mouse input.

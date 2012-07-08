@@ -18,70 +18,7 @@
 #include "ConsoleFuncs.h"
 #include "Input.h"
 
-struct
-{
-	BOOL L_Button; // Mouse
-	BOOL R_Button; // Mouse
-	BOOL xPos; // Mouse (within window)
-	BOOL yPos; // Mouse (within window)
-	BOOL xPosAtLastClick; // x position of cursor relative to draw area (client rect) during last left or right click
-	BOOL yPosAtLastClick; // y position of cursor relative to draw area (client rect) during last left or right click
-} MouseGlobals = { 0 };
-
-//  
-//  Structure containing all the keys, refer to these in the program to see if something is
-//  pressed or not.
-//  
-struct
-{
-	BOOL Key_A;
-	BOOL Key_B;
-	BOOL Key_C;
-	BOOL Key_D;
-	BOOL Key_E;
-	BOOL Key_F;
-	BOOL Key_G;
-	BOOL Key_H;
-	BOOL Key_I;
-	BOOL Key_J;
-	BOOL Key_K;
-	BOOL Key_L;
-	BOOL Key_M;
-	BOOL Key_N;
-	BOOL Key_O;
-	BOOL Key_P;
-	BOOL Key_Q;
-	BOOL Key_R;
-	BOOL Key_S;
-	BOOL Key_T;
-	BOOL Key_U;
-	BOOL Key_V;
-	BOOL Key_W;
-	BOOL Key_X;
-	BOOL Key_Y;
-	BOOL Key_Z;
-	BOOL Key_1;
-	BOOL Key_2;
-	BOOL Key_3;
-	BOOL Key_4;
-	BOOL Key_5;
-	BOOL Key_6;
-	BOOL Key_7;
-	BOOL Key_8;
-	BOOL Key_9;
-	BOOL Key_0;
-	BOOL Key_Space;
-	BOOL Key_Ctrl;
-	BOOL Key_Shift;
-	BOOL Arrow_Up;
-	BOOL Arrow_Left;
-	BOOL Arrow_Down;
-	BOOL Arrow_Right;
-	BOOL Control;
-	BOOL Backspace;
-	BOOL Shift;
-	BOOL Enter;
-} GlobalInputs = { 0 };
+GlobalInputs GLOBAL_INPUTS = { 0 };
 
 //
 // IsKeyPressed
@@ -92,23 +29,27 @@ BOOL IsKeyPressed( VIRTUAL_KEY key )
   switch(key)
   {
     case VK_RETURN:
-      return GlobalInputs.Enter;
+      return GLOBAL_INPUTS.Enter;
 	  case VK_BACK:
-      return GlobalInputs.Backspace;
+      return GLOBAL_INPUTS.Backspace;
 	  case VK_CONTROL:
-      return GlobalInputs.Control;
+      return GLOBAL_INPUTS.Control;
 	  case VK_SHIFT:
-      return GlobalInputs.Shift;
+      return GLOBAL_INPUTS.Shift;
 	  case VK_UP:
-      return GlobalInputs.Arrow_Up;
+      return GLOBAL_INPUTS.Arrow_Up;
 	  case VK_LEFT:
-      return GlobalInputs.Arrow_Left;
+      return GLOBAL_INPUTS.Arrow_Left;
 	  case VK_DOWN:
-      return GlobalInputs.Arrow_Down;
+      return GLOBAL_INPUTS.Arrow_Down;
 	  case VK_RIGHT:
-      return GlobalInputs.Arrow_Right;
+      return GLOBAL_INPUTS.Arrow_Right;
 	  case VK_SPACE:
-      return GlobalInputs.Key_Space;
+      return GLOBAL_INPUTS.Key_Space;
+    case VK_LBUTTON:
+      return GLOBAL_INPUTS.L_Button;
+    case VK_RBUTTON:
+      return GLOBAL_INPUTS.R_Button;
     default:
       return TRUE;
   }
@@ -117,7 +58,7 @@ BOOL IsKeyPressed( VIRTUAL_KEY key )
 //
 // UpdateInput
 // Purpose: Reads the console's input buffer and updates all keys within
-// the GlobalInputs struct
+// the GLOBAL_INPUTS struct
 //
 void UpdateInput( void )
 {
@@ -137,72 +78,93 @@ void UpdateInput( void )
     eventBuffer = malloc(sizeof(INPUT_RECORD) * numEvents);
     PeekConsoleInput(INPUT_HANDLE, eventBuffer, numEvents, pnumEventsRead);
     
+    // Loop through the events
     for (i_events = 0; i_events < numEventsRead; i_events++)
     {
-      if (eventBuffer[i_events].EventType == 1 && eventBuffer[i_events].Event.KeyEvent.bKeyDown == TRUE)
+      switch(eventBuffer[i_events].EventType)
       {
-        switch (eventBuffer[i_events].Event.KeyEvent.wVirtualKeyCode)
+      case KEY_EVENT:
+        if(eventBuffer[i_events].Event.KeyEvent.bKeyDown == TRUE)
         {
-          case VK_RETURN:
-					  GlobalInputs.Enter = TRUE;
-					  break;
-				  case VK_BACK:
-					  GlobalInputs.Backspace = TRUE;
-					  break;
-				  case VK_CONTROL:
-					  GlobalInputs.Control = TRUE;
-					  break;
-				  case VK_SHIFT:
-					  GlobalInputs.Shift = TRUE;
-					  break;
-				  case VK_UP:
-					  GlobalInputs.Arrow_Up = TRUE;
-					  break;
-				  case VK_LEFT:
-					  GlobalInputs.Arrow_Left = TRUE;
-					  break;
-				  case VK_DOWN:
-					  GlobalInputs.Arrow_Down = TRUE;
-					  break;
-				  case VK_RIGHT:
-					  GlobalInputs.Arrow_Right = TRUE;
-					  break;
-				  case VK_SPACE:
-					  GlobalInputs.Key_Space = TRUE;
-            break;
+          switch (eventBuffer[i_events].Event.KeyEvent.wVirtualKeyCode)
+          {
+            case VK_RETURN:
+					    GLOBAL_INPUTS.Enter = TRUE;
+					    break;
+				    case VK_BACK:
+					    GLOBAL_INPUTS.Backspace = TRUE;
+					    break;
+				    case VK_CONTROL:
+					    GLOBAL_INPUTS.Control = TRUE;
+					    break;
+				    case VK_SHIFT:
+					    GLOBAL_INPUTS.Shift = TRUE;
+					    break;
+				    case VK_UP:
+					    GLOBAL_INPUTS.Arrow_Up = TRUE;
+					    break;
+				    case VK_LEFT:
+					    GLOBAL_INPUTS.Arrow_Left = TRUE;
+					    break;
+				    case VK_DOWN:
+					    GLOBAL_INPUTS.Arrow_Down = TRUE;
+					    break;
+				    case VK_RIGHT:
+					    GLOBAL_INPUTS.Arrow_Right = TRUE;
+					    break;
+				    case VK_SPACE:
+					    GLOBAL_INPUTS.Key_Space = TRUE;
+              break;
+          }
         }
-      }
-      else
-      {
-        switch (eventBuffer[i_events].Event.KeyEvent.wVirtualKeyCode)
+        else
         {
-          case VK_RETURN:
-					  GlobalInputs.Enter = FALSE;
-					  break;
-				  case VK_BACK:
-					  GlobalInputs.Backspace = FALSE;
-					  break;
-				  case VK_CONTROL:
-					  GlobalInputs.Control = FALSE;
-					  break;
-				  case VK_SHIFT:
-					  GlobalInputs.Shift = FALSE;
-					  break;
-				  case VK_UP:
-					  GlobalInputs.Arrow_Up = FALSE;
-					  break;
-				  case VK_LEFT:
-					  GlobalInputs.Arrow_Left = FALSE;
-					  break;
-				  case VK_DOWN:
-					  GlobalInputs.Arrow_Down = FALSE;
-					  break;
-				  case VK_RIGHT:
-					  GlobalInputs.Arrow_Right = FALSE;
-					  break;
-				  case VK_SPACE:
-					  GlobalInputs.Key_Space = FALSE;
-            break;
+          switch (eventBuffer[i_events].Event.KeyEvent.wVirtualKeyCode)
+          {
+            case VK_RETURN:
+					    GLOBAL_INPUTS.Enter = FALSE;
+					    break;
+				    case VK_BACK:
+					    GLOBAL_INPUTS.Backspace = FALSE;
+					    break;
+				    case VK_CONTROL:
+					    GLOBAL_INPUTS.Control = FALSE;
+					    break;
+				    case VK_SHIFT:
+					    GLOBAL_INPUTS.Shift = FALSE;
+					    break;
+				    case VK_UP:
+					    GLOBAL_INPUTS.Arrow_Up = FALSE;
+					    break;
+				    case VK_LEFT:
+					    GLOBAL_INPUTS.Arrow_Left = FALSE;
+					    break;
+				    case VK_DOWN:
+					    GLOBAL_INPUTS.Arrow_Down = FALSE;
+					    break;
+				    case VK_RIGHT:
+					    GLOBAL_INPUTS.Arrow_Right = FALSE;
+					    break;
+				    case VK_SPACE:
+					    GLOBAL_INPUTS.Key_Space = FALSE;
+              break;
+          }
+        }
+        break;
+      case MOUSE_EVENT:
+        GLOBAL_INPUTS.xPos = eventBuffer[i_events].Event.MouseEvent.dwMousePosition.X;
+        GLOBAL_INPUTS.yPos = eventBuffer[i_events].Event.MouseEvent.dwMousePosition.Y;
+        GLOBAL_INPUTS.L_Button = eventBuffer[i_events].Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED;
+        GLOBAL_INPUTS.R_Button = eventBuffer[i_events].Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED;
+        if(GLOBAL_INPUTS.L_Button)
+        {
+          GLOBAL_INPUTS.xPosAtLastLeftClick = GLOBAL_INPUTS.xPos;
+          GLOBAL_INPUTS.yPosAtLastLeftClick = GLOBAL_INPUTS.yPos;
+        }
+        if(GLOBAL_INPUTS.R_Button)
+        {
+          GLOBAL_INPUTS.xPosAtLastRightClick = GLOBAL_INPUTS.xPos;
+          GLOBAL_INPUTS.yPosAtLastRightClick = GLOBAL_INPUTS.yPos;
         }
       }
     }
