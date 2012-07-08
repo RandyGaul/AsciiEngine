@@ -47,9 +47,11 @@ extern const _REDSQUARE_VTABLE REDSQUARE_VTABLE;
 // Definition of the object
 typedef struct _REDSQUARE
 {
-  GAMEOBJECT base_; // Contains base class
-  AE_RECT rect_;    // Represents the rectangle data
+  GAMEOBJECT base_;       // Contains base class
+  AE_RECT rect_;          // Represents the rectangle data
   const IMAGE *image_;    // Pointer to the image to represent this object
+  VECTOR2D vel_;          // Velocity vector for this object
+  float accel_;           // Acceleration scalar for this object
 } REDSQUARE;
 
 #endif  REDSQUAREH

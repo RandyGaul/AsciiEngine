@@ -121,5 +121,11 @@ float Vector2DCrossProduct( const VECTOR2D *vectorA, const VECTOR2D *vectorB );
 //
 void Vector2DFromAngle( VECTOR2D *vector, float angle);
 
+//
+// VelocityClamp
+// Purpose: Clamps a velocity vector within a maximum speed
+//
+void VelocityClamp( VECTOR2D *vector, float maxVel );
+
 
 #endif  VECTOR2DH

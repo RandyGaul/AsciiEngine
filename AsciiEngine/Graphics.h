@@ -19,9 +19,6 @@
 #define CHAR unsigned char 
 #define COL unsigned char 
 
-#define PtrAdd( ptr, offset ) \
-  (((char *)ptr) + offset)
-
 #define CharAt( image, x, y ) \
   (CHAR *)(PtrAdd( image->chars, ((y) * image->width + (x)) * sizeof( CHAR ) ))
 
@@ -41,6 +38,7 @@ typedef struct _IMAGE
   unsigned char *colors;
 } IMAGE;
 
+void ClearBuffer( void );
 IMAGE *AllocateImage( const char *string, int width, int height );
 RETURN_TYPE DeallocateImage( const char *imageID );
 void ImageSet( IMAGE *image, CHAR *charData, COL *colorData );
@@ -48,5 +46,6 @@ void ZeroImage( IMAGE *image );
 void InitGraphics( int width, int height );
 RETURN_TYPE DeallocateImage( const char *imageID );
 RETURN_TYPE WriteImageToScreen( const char *imageID, int xoffset, int yoffset );
+void WriteStringToScreen( char string[], int x, int y );
 
 #endif  GRAPHICSH

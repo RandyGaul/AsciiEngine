@@ -12,9 +12,19 @@
 #ifndef INPUTH
 #define INPUTH
 
-void GetInput( void );
-void DebounceAllKeys( void );
+typedef int VIRTUAL_KEY;
+
+//
+// UpdateInput
+// Purpose: Reads the console's input buffer and updates all keys within
+// the GlobalInputs struct
+//
+void UpdateInput( void );
+
+//
+// IsKeyPressed
+// Purpose: Checks to see if a specific key is pressed or not; returns BOOL
+//
 BOOL IsKeyPressed( VIRTUAL_KEY key );
-BOOL IsAnyKeyPressed( VIRTUAL_KEY key );
 
 #endif  INPUTH

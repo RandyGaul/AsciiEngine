@@ -12,7 +12,7 @@
 
 // This is used to reverse clamp floating values to zero for
 // effective floating point usage
-#define EPSILON 0.0001
+#define EPSILON 0.0001f
 
 #include "Vector2D.h"
 #include "Shapes.h"
@@ -54,16 +54,22 @@ BOOL StaticCircleToStaticCircle( const AE_CIRCLE *circleA, const AE_CIRCLE *circ
 BOOL StaticRectToStaticRect( const AE_RECT *rectA, const AE_RECT *rectB );
 
 //
-// RoundFloat
+// FloatToInt
+// Purpose: Truncates all of the floating point value
+//   
+int FloatToInt( float val );
+
+//
+// FloatToIntRoundUp
 // Purpose: Returns an integer representation of a
 //          float rounded to the nearest integer, upwards
 //   
-int FloatToInt( float val );
+int FloatToIntRoundUp( float val );
 
 //
 // SnapToCell
 // Purpose: Snaps a floating point value to the nearest cell
 // 
-void SnapToCell( float *Coordinate );
+void SnapToCell( float *coordinate );
 
 #endif  MATH2DH

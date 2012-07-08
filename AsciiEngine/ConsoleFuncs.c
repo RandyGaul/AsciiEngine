@@ -14,8 +14,16 @@
 #include "ConsoleFuncs.h"
 #include "Graphics.h"
 
-HANDLE OUTPUT_HANDLE; /* write (output) handle */
-HANDLE INPUT_HANDLE; /* read (input handle */
+WCHAR CONSOLE_TITLE[MAX_CONSOLE_TITLE];
+
+BOOL WINDOW_FOCUS = TRUE;     /* BOOL for storing window focus */
+HANDLE OUTPUT_HANDLE;         /* write (output) handle */
+HANDLE INPUT_HANDLE;          /* read (input handle */
+HWND WINDOW_HANDLE;           /* Handle to window */
+WNDPROC OLD_WNDPROC = { 0 };  /* Handle to the default wndproc */
+
+LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 
 /******************************************************************************
   initConsole
@@ -49,7 +57,7 @@ void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty 
 
   /* initialize handles */
   HANDLE wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-  HWND hwnd = GetConsoleWindow();
+  WINDOW_HANDLE = GetConsoleWindow( );
 
   /* initialize handles */
   OUTPUT_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -74,7 +82,7 @@ void initConsole(unsigned short *title, wchar_t *fontName, int fontx, int fonty 
   SetConsoleWindowInfo(OUTPUT_HANDLE, TRUE, &windowSize);
   
   /* Set the window position */
-  SetWindowPos(hwnd, HWND_TOP, (x - ((BUFFERWIDTH / 2) * fontx)) - 5, (y - ((BUFFERHEIGHT / 2) * fonty)) - 5, 0, 0, SWP_NOSIZE);
+  SetWindowPos(WINDOW_HANDLE, HWND_TOP, (x - ((BUFFERWIDTH / 2) * fontx)) - 5, (y - ((BUFFERHEIGHT / 2) * fonty)) - 5, 0, 0, SWP_NOSIZE);
 }
 
 /******************************************************************************

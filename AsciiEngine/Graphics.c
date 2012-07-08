@@ -26,6 +26,20 @@ CHAR_INFO *DOUBLE_BUFFER;
 int BUFFERHEIGHT = 0;
 int BUFFERWIDTH = 0;
 
+void ClearBuffer( void )
+{
+  int x, y;
+
+  for(y = 0; y < BUFFERHEIGHT; y++)
+  {
+    for(x = 0; x < BUFFERWIDTH; x++)
+    {
+      DOUBLE_BUFFER[(y * BUFFERWIDTH) + x].Char.AsciiChar = 0;
+      DOUBLE_BUFFER[(y * BUFFERWIDTH) + x].Attributes = 0;
+    }
+  }
+}
+
 // Initializes the chars and colors arrays of an image to zero
 void ZeroImage( IMAGE *image )
 {
@@ -131,15 +145,11 @@ RETURN_TYPE DeallocateImage( const char *imageID )
 void InitGraphics( int width, int height )
 {
   // Setup various images in memory for use throughout the program
-  CHAR charArray2[3 * 3] = {
-    0xDB, 0xDB, 0xDB,
-    0xDB, 0xDB, 0xDB,
-    0xDB, 0xDB, 0xDB,
+  CHAR charArray2[1 * 1] = {
+    0xDB,
   };
-  COL colorArray2[3 * 3] = {
-    0x04, 0x04, 0x04,
-    0x04, 0x04, 0x04,
-    0x04, 0x04, 0x04,
+  COL colorArray2[1 * 1] = {
+    0x04,
   };
   IMAGE *image2;
 
@@ -150,7 +160,7 @@ void InitGraphics( int width, int height )
   BUFFERWIDTH = width;
 
   // Load all the various images used throughout the project
-  image2 = AllocateImage( "REDSQUARE", 3, 3 );
+  image2 = AllocateImage( "REDSQUARE", 1, 1 );
   ImageSet( image2, charArray2, colorArray2 );
 }
 
@@ -188,4 +198,30 @@ RETURN_TYPE WriteImageToScreen( const char *imageID, int xoffset, int yoffset )
   }
 
   return RETURN_SUCCESS;
+}
+
+//
+// WriteCharToBuffer
+// Purpose: Writes a single character to the buffer
+//
+void WriteCharToBuffer( CHAR character, COL color, int x, int y )
+{
+  DOUBLE_BUFFER[x + BUFFERWIDTH * y].Char.AsciiChar = character;
+  DOUBLE_BUFFER[x + BUFFERWIDTH * y].Attributes = color;
+  return;
+}
+//
+// WriteStringToScreen
+// Purpose: Writes a null terminated string to the buffer, with
+//          designated starting point and ending point.
+//
+void WriteStringToScreen( char string[], int x, int y )
+{
+  int i;
+  
+  for (i = 0; string[i] != 0; ++i, ++x)
+  {
+    DOUBLE_BUFFER[x + BUFFERWIDTH * y].Char.AsciiChar = string[i];
+    DOUBLE_BUFFER[x + BUFFERWIDTH * y].Attributes = 7;
+  }
 }

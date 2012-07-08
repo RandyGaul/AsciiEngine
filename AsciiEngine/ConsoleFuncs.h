@@ -14,8 +14,14 @@
 #include <windows.h>
 #include <stdio.h>
 
+extern BOOL WINDOW_FOCUS; /* BOOL for storing window focus */
 extern HANDLE OUTPUT_HANDLE; /* write (output) handle */
-extern HANDLE INPUT_HANDLE; /* read (input handle */
+extern HANDLE INPUT_HANDLE;  /* read (input handle */
+extern HWND WINDOW_HANDLE;   /* Handle to window */
+
+#define MAX_CONSOLE_TITLE 100
+
+extern WCHAR CONSOLE_TITLE[];
 
 #define WM_SETCONSOLEINFO (WM_USER+201) 
 #pragma pack(push, 1) 

@@ -18,7 +18,7 @@
 int main(void)
 {
   // Initializes the graphics settings.
-  InitGraphics( 70, 30 );
+  InitGraphics( 100, 60 );
 
   // Initializes the console.
   // The first string is the name of your window. The second string is the
@@ -61,13 +61,12 @@ int main(void)
 		{
 			FrameStart( ); // get time frame started
 
-			GetInput( ); // Capture input
+			UpdateInput( ); // Capture input
 
 			for (;;)
 			{
 				SetDT( dtCalculate( ) ); // Set's dt for the function GetDT
 				Update( ); // calculate change in time since last call, for update
-				DebounceAllKeys( );
 				if (FPSLimit( TIME_BETWEEN_FRAMES_IN_MILLISECONDS ))
 				{
 					Draw( );

@@ -127,11 +127,20 @@ BOOL StaticRectToStaticRect( const AE_RECT *rectA, const AE_RECT *rectB )
 }
 
 //
-// RoundFloat
+// FloatToInt
+// Purpose: Truncates all of the floating point value
+//   
+int FloatToInt( float val )
+{
+	return (int)val;
+}
+
+//
+// FloatToIntRoundUp
 // Purpose: Returns an integer representation of a
 //          float rounded to the nearest integer, upwards
 //   
-int FloatToInt( float val )
+int FloatToIntRoundUp( float val )
 {
 	return (int)(val + .5f);
 }
@@ -140,7 +149,7 @@ int FloatToInt( float val )
 // SnapToCell
 // Purpose: Snaps a floating point value to the nearest cell
 // 
-void SnapToCell( float *Coordinate )
+void SnapToCell( float *coordinate )
 {
-	*Coordinate = (float)((int)(*Coordinate + .5f));
+	*coordinate = ((float)((int)(*coordinate))) + .5f;
 }

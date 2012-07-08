@@ -21,10 +21,10 @@ typedef struct _AE_CIRCLE
 typedef struct _AE_RECT
 {
   VECTOR2D center_;
-  int width_;
-  int height_;
-  int halfWidth_;
-  int halfHeight_;
+  float width_;
+  float height_;
+  float halfWidth_;
+  float halfHeight_;
 } AE_RECT;
 
 #endif  SHAPESH

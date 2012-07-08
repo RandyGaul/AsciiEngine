@@ -12,6 +12,10 @@
 
 #include <windows.h>
 
+// Takes a pointer and returns a pointer offset in bytes
+#define PtrAdd( ptr, offset ) \
+  (((char *)ptr) + offset)
+
 #define DT_MAX 60.0f
 #define TIME_BETWEEN_FRAMES_IN_MILLISECONDS 32
 

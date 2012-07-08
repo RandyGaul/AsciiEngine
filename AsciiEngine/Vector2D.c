@@ -164,3 +164,27 @@ void Vector2DFromAngle( VECTOR2D *vector, float angle)
   vector->x_ = cosf(angle);
   vector->y_ = sinf(angle);
 }
+
+//
+// VelocityClamp
+// Purpose: Clamps a velocity vector within a maximum speed
+//
+void VelocityClamp( VECTOR2D *vector, float maxVel )
+{
+  if(vector->x_ > maxVel)
+  {
+    vector->x_ = maxVel;
+  }
+  else if(vector->x_ < -maxVel)
+  {
+    vector->x_ = -maxVel;
+  }
+  else if(vector->y_ > maxVel)
+  {
+    vector->y_ = maxVel;
+  }
+  else if(vector->y_ < -maxVel)
+  {
+    vector->y_ = -maxVel;
+  }
+}

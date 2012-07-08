@@ -7,14 +7,13 @@
 // Contact: r.gaul@digipen.edu
 ////////////////////////////////////////////////////
 
+#include <stdio.h>
 #include "RedSquare.h"
 #include "Math2D.h"
 #include "Input.h"
 #include "Random.h"
-
-// Defines for readability
-#define REDSQUARE_WIDTH 3
-#define REDSQUARE_HEIGHT REDSQUARE_WIDTH
+#include "TileMap.h"
+#include "Graphics.h"
 
 // Definition of the REDSQUARE's virtual table
 const _REDSQUARE_VTABLE REDSQUARE_VTABLE = {
@@ -46,13 +45,16 @@ void RedSquareConstruct( REDSQUARE *self )
 void RedSquareInit     ( REDSQUARE *self )
 {
   AE_RECT rect = { 0 };
-  rect.center_.x_ = (float)RandomInt( 0, BUFFERWIDTH );
-  rect.center_.y_ = (float)RandomInt( 0, BUFFERHEIGHT );
-  rect.height_ = REDSQUARE_HEIGHT;
-  rect.width_ = REDSQUARE_WIDTH;
-  rect.halfWidth_ = 1;
-  rect.halfHeight_ = 1;
+  rect.center_.x_ = 2;
+  rect.center_.y_ = 2;
+  rect.height_ = 1.f;
+  rect.width_ = 1.f;
+  rect.halfWidth_ = .5f;
+  rect.halfHeight_ = .5f;
   RedSquareSet( self, rect, AE_FindImage( "REDSQUARE" ) );
+  self->vel_.x_ = 0.f;
+  self->vel_.y_ = 0.f;
+  self->accel_ = 0.0001f;
 }
 
 // Initializer function for this object type
@@ -68,21 +70,58 @@ void RedSquareSet      ( REDSQUARE *self, const AE_RECT rect, const IMAGE *image
 // Update function for this object type
 void RedSquareUpdate   ( REDSQUARE *self )
 {
+  COLLISION_FLAG flag = CheckHotspotCollision( self->rect_ );
+  char buffer[100] = { 0 };
+
+  // Apply acceleration for keystrokes
+  // Documentation for physics:    http://cecilsunkure.blogspot.com/2012/02/basic-2d-vector-physics.html
+  // Documentation for collisions: http://cecilsunkure.blogspot.com/2012/07/collision-basic-2d-collision-detection.html
+  //                               http://cecilsunkure.blogspot.com/2012/04/binary-collision-maps-platformer.html
   if(IsKeyPressed( VK_RIGHT ))
   {
-    self->rect_.center_.x_ += 1.f;
+    self->vel_.x_ += self->accel_ * GetDT( );
   }
   if(IsKeyPressed( VK_LEFT ))
   {
-    self->rect_.center_.x_ -= 1.f;
+    self->vel_.x_ += -self->accel_ * GetDT( );
   }
   if(IsKeyPressed( VK_UP ))
   {
-    self->rect_.center_.y_ -= 1.f;
+    self->vel_.y_ += -self->accel_ * GetDT( );
   }
   if(IsKeyPressed( VK_DOWN ))
   {
-    self->rect_.center_.y_ += 1.f;
+    self->vel_.y_ += self->accel_ * GetDT( );
+  }
+
+  // Clamp velocity within a max/min range
+  VelocityClamp( &self->vel_, .02f );
+
+  self->rect_.center_.x_ += self->vel_.x_ * GetDT( );
+  self->rect_.center_.y_ += self->vel_.y_ * GetDT( );
+
+  sprintf( buffer, "%.3f, %.3f", self->vel_.x_, self->vel_.y_ );
+  WriteStringToScreen( buffer, 30, 30 );
+
+  if(flag & COLLISION_BOTTOM)
+  {
+    SnapToCell( &self->rect_.center_.y_ );
+    self->vel_.y_ = 0.f;
+  }
+  if(flag & COLLISION_TOP)
+  {
+    SnapToCell( &self->rect_.center_.y_ );
+    self->vel_.y_ = 0.f;
+  }
+  if(flag & COLLISION_LEFT)
+  {
+    SnapToCell( &self->rect_.center_.x_ );
+    self->vel_.x_ = 0.f;
+  }
+  if(flag & COLLISION_RIGHT)
+  {
+    SnapToCell( &self->rect_.center_.x_ );
+    self->vel_.x_ = 0.f;
   }
 }
 
@@ -90,8 +129,8 @@ void RedSquareUpdate   ( REDSQUARE *self )
 void RedSquareDraw     ( REDSQUARE *self )
 {
   WriteImageToScreen( "REDSQUARE",
-    FloatToInt( self->rect_.center_.x_ ) - self->rect_.halfWidth_,
-    FloatToInt( self->rect_.center_.y_ ) - self->rect_.halfHeight_ );
+    FloatToInt( self->rect_.center_.x_ + EPSILON ),
+    FloatToInt( self->rect_.center_.y_ + EPSILON) );
 }
 
 // Destructor for this object type
