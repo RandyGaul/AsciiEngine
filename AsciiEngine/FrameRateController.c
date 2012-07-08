@@ -32,6 +32,16 @@ float GetDT( void )
   return dt;
 }
 
+millisecond GetTimeAtFrameStart( void )
+{
+  return timeAtFrameStart;
+}
+
+millisecond GetCurrentGameTime( void )
+{
+  return (millisecond)timeGetTime( );
+}
+
 //  
 //  Name: SetStateStartTime
 //  Purpose: Records the time at function call.

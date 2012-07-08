@@ -3,6 +3,11 @@
 // See the file LICENSE.txt for copying permission.
 // 
 // Original Author: Randy Gaul
+// Takes a pointer and returns a pointer offset in bytes
+#define PtrAdd( ptr, offset ) \
+  (((char *)ptr) + offset)
+
+#define DT_MAX 60.0f
 // Date:   7/3/2012
 // Contact: r.gaul@digipen.edu
 ////////////////////////////////////////////////////
@@ -12,12 +17,10 @@
 
 #include <windows.h>
 
-// Takes a pointer and returns a pointer offset in bytes
-#define PtrAdd( ptr, offset ) \
-  (((char *)ptr) + offset)
+#define TIME_BETWEEN_FRAMES_IN_MILLISECONDS 20
 
-#define DT_MAX 60.0f
-#define TIME_BETWEEN_FRAMES_IN_MILLISECONDS 32
+// Compile switch for displaying (or not) the FPS onto the screen
+#define DISPLAY_FPS
 
 #define TRUE 1
 #define FALSE 0

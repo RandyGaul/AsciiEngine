@@ -264,6 +264,7 @@ BOOL SetConsoleInfo(HWND hwndConsole, CONSOLE_INFO *pci)
 }
 
 #include "Graphics.h"
+#include "FrameRateController.h"
 
 /* Wrapper function for writing to console */
 void RenderScreen( void )
@@ -272,6 +273,12 @@ void RenderScreen( void )
   COORD charBufSize = {BUFFERWIDTH, BUFFERHEIGHT};
   COORD characterPos = {0,0};
   SMALL_RECT writeArea = {0,0,BUFFERWIDTH - 1,BUFFERHEIGHT - 1};
+
+#ifdef DISPLAY_FPS
+  char buffer[100];
+  sprintf( buffer, "FPS: %d", (int)(1000.f / (float)(GetCurrentGameTime( ) - GetTimeAtFrameStart( ))) );
+  WriteStringToScreen( buffer, BUFFERWIDTH - 8, 0 );
+#endif // DISPLAY_FPS
   
   // This function renders to the console's screen buffer. This function is slow! Only
   // call this once per game loop at most.

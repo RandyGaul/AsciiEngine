@@ -22,5 +22,7 @@ void SetStateStartTime( void );
 unsigned int GetStateStartTime( void );
 void SetDT( float deltaTime );
 float GetDT( void );
+millisecond GetTimeAtFrameStart( void );
+millisecond GetCurrentGameTime( void );
 
 #endif  FRAMERATECONTROLLERH
