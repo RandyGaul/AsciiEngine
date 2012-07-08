@@ -258,6 +258,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Message.h"
+					>
+				</File>
+				<File
 					RelativePath=".\ObjectFactory.c"
 					>
 				</File>

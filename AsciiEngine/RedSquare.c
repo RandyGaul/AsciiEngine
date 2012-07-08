@@ -55,6 +55,7 @@ void RedSquareInit     ( REDSQUARE *self )
   self->vel_.x_ = 0.f;
   self->vel_.y_ = 0.f;
   self->accel_ = 0.0001f;
+  self->base_.queue_ = NULL;
 }
 
 // Initializer function for this object type

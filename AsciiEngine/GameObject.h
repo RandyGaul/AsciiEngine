@@ -10,6 +10,8 @@
 #ifndef GAMEOBJECTH
 #define GAMEOBJECTH
 
+#include "Message.h"
+
 // Contains all the various IDs for every type of
 // game object object in the game
 typedef enum
@@ -39,9 +41,10 @@ typedef struct _GAMEOBJECT_VTABLE
 // Base class for a generic game object.
 typedef struct _GAMEOBJECT
 {
-  GAMEOBJECT_TYPE ID;               // Type of object this object is
-  struct _GAMEOBJECT_NODE *node;    // Pointer to this object's node for easy deletion
-  const _GAMEOBJECT_VTABLE *vtable; // Generalized vtable of various object functions
+  GAMEOBJECT_TYPE ID_;               // Type of object this object is
+  AE_MESSAGE *queue_;                // Queue of all messages recieved by this object
+  struct _GAMEOBJECT_NODE *node_;    // Pointer to this object's node for easy deletion
+  const _GAMEOBJECT_VTABLE *vtable_; // Generalized vtable of various object functions
 } GAMEOBJECT;
 
 // A simple doubly node for a linked list.

@@ -61,7 +61,7 @@ RETURN_TYPE AE_ObjectListPush( GAMEOBJECT *object )
   }
 
   // Let object have pointer to its node
-  object->node = newNode;
+  object->node_ = newNode;
 
   return RETURN_SUCCESS;
 }
@@ -100,8 +100,8 @@ GAMEOBJECT *AE_CreateObject( GAMEOBJECT_TYPE ID )
   {
   case GO_REDSQUARE:
     object = malloc( sizeof( REDSQUARE ) );
-    ((GAMEOBJECT *)object)->vtable = (const _GAMEOBJECT_VTABLE *)(&REDSQUARE_VTABLE);
-    ((REDSQUARE *)object)->base_.ID = GO_REDSQUARE;
+    ((GAMEOBJECT *)object)->vtable_ = (const _GAMEOBJECT_VTABLE *)(&REDSQUARE_VTABLE);
+    ((REDSQUARE *)object)->base_.ID_ = GO_REDSQUARE;
     AE_ObjectListPush( object );
     return object;
   }
@@ -117,8 +117,8 @@ GAMEOBJECT *AE_CreateObject( GAMEOBJECT_TYPE ID )
 //
 RETURN_TYPE AE_DeleteObject( GAMEOBJECT *toDelete )
 {
-  AE_ObjectNodeDelete( toDelete->node );
-  toDelete->vtable->Destroy( toDelete );
+  AE_ObjectNodeDelete( toDelete->node_ );
+  toDelete->vtable_->Destroy( toDelete );
   return RETURN_SUCCESS;
 }
 
@@ -132,7 +132,7 @@ RETURN_TYPE AE_UpdateObjects( void )
 
   while(scan)
   {
-    scan->data_->vtable->Update( scan->data_ );
+    scan->data_->vtable_->Update( scan->data_ );
     scan = scan->next_;
   }
   return RETURN_SUCCESS;
@@ -148,7 +148,7 @@ RETURN_TYPE AE_DrawObjects( void )
 
   while(scan)
   {
-    scan->data_->vtable->Draw( scan->data_ );
+    scan->data_->vtable_->Draw( scan->data_ );
     scan = scan->next_;
   }
   return RETURN_SUCCESS;
@@ -185,7 +185,7 @@ RETURN_TYPE AE_InitObjects( void )
 
   while(scan)
   {
-    scan->data_->vtable->Init( scan->data_ );
+    scan->data_->vtable_->Init( scan->data_ );
     scan = scan->next_;
   }
   return RETURN_SUCCESS;
