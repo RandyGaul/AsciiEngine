@@ -73,8 +73,14 @@ RETURN_TYPE AE_ObjectListPush( GAMEOBJECT *object )
 RETURN_TYPE AE_ObjectNodeDelete( GAMEOBJECT_NODE *toDelete )
 {
   // Disconnect node from list
-  toDelete->prev_->next_ = toDelete->next_;
-  toDelete->next_->prev_ = toDelete->prev_;
+  if(toDelete->prev_)
+  {
+    toDelete->prev_->next_ = toDelete->next_;
+    if(toDelete->next_)
+    {
+      toDelete->next_->prev_ = toDelete->prev_;
+    }
+  }
 
   free( toDelete );
   return RETURN_SUCCESS;
@@ -117,7 +123,6 @@ GAMEOBJECT *AE_CreateObject( GAMEOBJECT_TYPE ID )
 //
 RETURN_TYPE AE_DeleteObject( GAMEOBJECT *toDelete )
 {
-  AE_ObjectNodeDelete( toDelete->node_ );
   toDelete->vtable_->Destroy( toDelete );
   return RETURN_SUCCESS;
 }
@@ -160,12 +165,15 @@ RETURN_TYPE AE_DrawObjects( void )
 //
 RETURN_TYPE AE_DestroyObjects( void )
 {
-  GAMEOBJECT_NODE *scan = OBJECT_LIST;
+  GAMEOBJECT_NODE *temp = NULL, *scan = OBJECT_LIST;
 
   while(scan)
   {
     AE_DeleteObject( scan->data_ );
-    scan = scan->next_;
+    free( scan->data_ );
+    temp = scan->next_;
+    AE_ObjectNodeDelete( scan );
+    scan = temp;
   }
   return RETURN_SUCCESS;
 }
