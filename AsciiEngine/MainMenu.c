@@ -17,12 +17,14 @@
 #include "GameStateManager.h"
 #include "GameStateList.h"
 #include "GlobalDefines.h"
-#include "Input.h"
-#include "Graphics.h"
 #include "Random.h"
-#include "ConsoleFuncs.h"
 #include "FrameRateController.h"
-#include "TileMap.h"
+#include "TileMap.h"          // Various tile mapping functions
+#include "Graphics.h"         // Various graphics functions
+#include "Input.h"            // Various input functions
+#include "ConsoleFuncs.h"     // RenderScreen;
+#include "ObjectFactory.h"    // GameObject management system
+#include "OpenFile.h"         // LoadAllArtAssets;
 
 // Allows for management of GameObjects without including
 // all the various game object headers to this file
@@ -30,8 +32,8 @@
 
 int MainMenuLoad( void )
 {
-  AE_CreateObject( GO_REDSQUARE );
-  MapSystemInit( "TEST_MAP.txt" );
+  MapSystemInit( "../MapAssets/TEST_MAP.txt" );
+  LoadAllArtAssets( "../ArtAssets/" );
 	return RETURN_SUCCESS;
 }
 
@@ -40,6 +42,7 @@ int MainMenuInitialize( void )
   // Run the default initializer on all objects, any custom
   // initialization of an object will use the object's set
   // function, and should be done after this function call.
+  AE_CreateObject( GO_REDSQUARE );
   AE_InitObjects( );
 	return RETURN_SUCCESS;
 }
@@ -62,11 +65,11 @@ int MainMenuDraw( )
   // Demonstration of mouse input
   if(IsKeyPressed( VK_LBUTTON ))
   {
-    WriteImageToScreen( "WhiteTile", GLOBAL_INPUTS.xPosAtLastLeftClick, GLOBAL_INPUTS.yPosAtLastLeftClick );
+    WriteImageToScreen( "WhiteSquare.AEArt", GLOBAL_INPUTS.xPosAtLastLeftClick, GLOBAL_INPUTS.yPosAtLastLeftClick );
   }
   if(IsKeyPressed( VK_RBUTTON ))
   {
-    WriteImageToScreen( "BlueTile", GLOBAL_INPUTS.xPosAtLastRightClick, GLOBAL_INPUTS.yPosAtLastRightClick );
+    WriteImageToScreen( "BlueSquare.AEArt", GLOBAL_INPUTS.xPosAtLastRightClick, GLOBAL_INPUTS.yPosAtLastRightClick );
   }
 
   AE_DrawObjects( ); // draws all active objects

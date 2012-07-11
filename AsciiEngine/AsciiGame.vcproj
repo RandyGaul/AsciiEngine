@@ -234,6 +234,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\OpenFile.c"
+					>
+				</File>
+				<File
+					RelativePath=".\OpenFile.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Random.c"
 					>
 				</File>
