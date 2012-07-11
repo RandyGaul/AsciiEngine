@@ -26,7 +26,7 @@ int main(void)
   // though you can try strings "Lucida Console" or "Consolas" as they are
   // optional fonts in Windows 7 and Vista. A custom font can be created and
   // implemented if you're so inclined.
-  initConsole(TEXT("AsciiEngine V1.00"), TEXT(""), 8, 8 );
+  initConsole(TEXT("AsciiEngine V1.01"), TEXT(""), 8, 8 );
 
   // Seed PRNG
   // http://cecilsunkure.blogspot.com/2010/11/prngs-psuedo-random-number-generator.html

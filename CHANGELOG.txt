@@ -1,0 +1,9 @@
+7/??/2012 -- INITIAL COMMIT
+7/03/2012 -- Created ObjectFactory object management system.
+7/10/2012 -- Version 1.01
+             -Created AsciiEngine Image Editor v1.00 (AEIEditor)
+             -Bugfix in ObjectFactory when deleting objects
+             -Minor updates to graphics and tile mapping
+             -Added support for loading .AEArt files (art files created with AEIEditor)
+             -Added support for loading all .AEArt files within an entire directory
+             -Other minor updates
