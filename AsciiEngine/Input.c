@@ -51,7 +51,7 @@ BOOL IsKeyPressed( VIRTUAL_KEY key )
     case VK_RBUTTON:
       return GLOBAL_INPUTS.R_Button;
     default:
-      return TRUE;
+      return FALSE;
   }
 }
 
@@ -152,10 +152,13 @@ void UpdateInput( void )
         }
         break;
       case MOUSE_EVENT:
-        GLOBAL_INPUTS.xPos = eventBuffer[i_events].Event.MouseEvent.dwMousePosition.X;
-        GLOBAL_INPUTS.yPos = eventBuffer[i_events].Event.MouseEvent.dwMousePosition.Y;
         GLOBAL_INPUTS.L_Button = eventBuffer[i_events].Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED;
         GLOBAL_INPUTS.R_Button = eventBuffer[i_events].Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED;
+        if( eventBuffer[i_events].Event.MouseEvent.dwEventFlags == MOUSE_MOVED )
+        {
+          GLOBAL_INPUTS.xPos = eventBuffer[i_events].Event.MouseEvent.dwMousePosition.X;
+          GLOBAL_INPUTS.yPos = eventBuffer[i_events].Event.MouseEvent.dwMousePosition.Y;
+        }
         if(GLOBAL_INPUTS.L_Button)
         {
           GLOBAL_INPUTS.xPosAtLastLeftClick = GLOBAL_INPUTS.xPos;
@@ -166,6 +169,7 @@ void UpdateInput( void )
           GLOBAL_INPUTS.xPosAtLastRightClick = GLOBAL_INPUTS.xPos;
           GLOBAL_INPUTS.yPosAtLastRightClick = GLOBAL_INPUTS.yPos;
         }
+        break;
       }
     }
     FlushConsoleInputBuffer( INPUT_HANDLE );
