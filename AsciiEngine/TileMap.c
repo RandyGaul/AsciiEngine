@@ -174,17 +174,19 @@ COLLISION_FLAG CheckHotspotCollision( const AE_RECT rect )
 //
 RETURN_TYPE ImportMAPDATA( const char *FileName )
 {
-	FILE *fp = fopen( FileName, "rb" );
+	FILE *fp;
   int x, y;
+
+  fopen_s( &fp, FileName, "rb" );
 
 	if(fp)
 	{
 		// Set pointer to start of first number for width
 		fseek( fp, 6, SEEK_SET );
-		fscanf( fp, "%d", &TILE_MAP_SYSTEM.MAP_WIDTH );
+		fscanf_s( fp, "%d", &TILE_MAP_SYSTEM.MAP_WIDTH );
 		// Set pointer to start of second number for height
 		fseek( fp, 8, SEEK_CUR );
-		fscanf( fp, "%d", &TILE_MAP_SYSTEM.MAP_HEIGHT );
+		fscanf_s( fp, "%d", &TILE_MAP_SYSTEM.MAP_HEIGHT );
 
 		// Allocate space for our map structure and the array
 		TILE_MAP_SYSTEM.TILE_MAP = (MAPDATA *)malloc( sizeof( MAPDATA ) +
@@ -209,7 +211,7 @@ RETURN_TYPE ImportMAPDATA( const char *FileName )
 			{
 				int *dataCell, *thisCell;
 				dataCell = CellAt( TILE_MAP_SYSTEM.TILE_MAP, x, y );
-				fscanf( fp, "%d", dataCell );
+				fscanf_s( fp, "%d", dataCell );
 				thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, x, y );
 
 				// Truncate to binary in order to construct the binary array
@@ -253,13 +255,6 @@ void FreeMap( void )
 //
 RETURN_TYPE MapSystemInit( const char *FileName )
 {
-  CHAR charData = 219;
-  COL colorDataWhite = 15;
-  COL colorDataBlue = 3;
-
-  ImageSet( AllocateImage( "WhiteTile", 1, 1 ), &charData, &colorDataWhite );
-  ImageSet( AllocateImage( "BlueTile", 1, 1 ), &charData, &colorDataBlue );
-
   if(ImportMAPDATA( FileName ) == RETURN_SUCCESS)
   {
     return RETURN_SUCCESS;
@@ -302,11 +297,11 @@ RETURN_TYPE DrawMap( void )
       {
         if(*thisCell == 1)
         {
-          WriteImageToScreen( "WhiteTile", x, y );
+          WriteImageToScreen( "WhiteSquare.AEArt", x, y );
         }
         else if(*thisCell == 2)
         {
-          WriteImageToScreen( "BlueTile", x, y );
+          WriteImageToScreen( "BlueSquare.AEArt",  x, y );
         }
       }
     }
