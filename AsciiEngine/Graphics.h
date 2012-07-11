@@ -15,9 +15,19 @@
 
 #include <windows.h>
 #include "GlobalDefines.h"
+#include "Math2D.h"
 
 #define CHAR unsigned char 
 #define COL unsigned char 
+
+#define FOREGROUND_COLOR_1    0x0001
+#define FOREGROUND_COLOR_2    0x0002
+#define FOREGROUND_COLOR_3    0x0004
+#define FOREGROUND_INTENSITY  0x0008
+#define BACKGROUND_COLOR_1    0x0010
+#define BACKGROUND_COLOR_2    0x0020
+#define BACKGROUND_COLOR_3    0x0040
+#define BACKGROUND_INTENSITY  0x0080
 
 #define CharAt( image, x, y ) \
   (CHAR *)(PtrAdd( image->chars, ((y) * image->width + (x)) * sizeof( CHAR ) ))
@@ -46,6 +56,11 @@ void ZeroImage( IMAGE *image );
 void InitGraphics( int width, int height );
 RETURN_TYPE DeallocateImage( const char *imageID );
 RETURN_TYPE WriteImageToScreen( const char *imageID, int xoffset, int yoffset );
+RETURN_TYPE WriteCharToImage( IMAGE *image, CHAR character, COL color, int x, int y );
 void WriteStringToScreen( char string[], int x, int y );
+RETURN_TYPE WriteImageToImage( const char *drawOnMe, const char *drawWithMe, int xOffset, int yOffset );// Writes an image onto the DOUBLE_BUFFER
+// Does NOT render the DOUBLE_BUFFER to the screen
+// Only draws from the coordinates of topLeft and topRight on the source image
+RETURN_TYPE WritePortionOfImageToScreen( const char *imageID, AE_COORD topLeft, AE_COORD bottomRight, int xoffset, int yoffset );
 
 #endif  GRAPHICSH

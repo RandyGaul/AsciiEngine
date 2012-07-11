@@ -101,14 +101,18 @@ IMAGE *AllocateImage( const char *string, int width, int height )
   IMAGE *image = (IMAGE *)malloc( sizeof( IMAGE )
                                   + strlen( string ) + 1
                                   + width * height * sizeof( unsigned char )
-                                  + width * height * sizeof( unsigned char ) );
+                                  + width * height * sizeof( unsigned char ) + 4 +
+                                  (sizeof( IMAGE )
+                                  + strlen( string ) + 1
+                                  + width * height * sizeof( unsigned char )
+                                  + width * height * sizeof( unsigned char ) + 4) % 4);
 
   image->width = width;
   image->height = height;
 
   // Initialize the ID pointer to directly after the IMAGE struct
   image->ID = PtrAdd( image, sizeof( IMAGE ) );
-  strcpy( image->ID, string );
+  strcpy_s( image->ID, strlen( string ) + 1, string );
 
   // Initialize chars pointer to directly after the ID string
   image->chars = PtrAdd( image->ID, strlen( image->ID ) + 1 );
@@ -200,6 +204,78 @@ RETURN_TYPE WriteImageToScreen( const char *imageID, int xoffset, int yoffset )
   return RETURN_SUCCESS;
 }
 
+// Writes an image onto the DOUBLE_BUFFER
+// Does NOT render the DOUBLE_BUFFER to the screen
+// Only draws from the coordinates of topLeft and topRight on the source image
+RETURN_TYPE WritePortionOfImageToScreen( const char *imageID, AE_COORD topLeft, AE_COORD bottomRight, int xoffset, int yoffset )
+{
+  int x, y;
+  IMAGE *image = AE_FindImage( imageID ); // Get image pointer
+
+  // Return failure if image not found in lookup
+  if(!image)
+  {
+    return RETURN_FAILURE;
+  }
+
+  for(y = topLeft.y_; y < bottomRight.y_; ++y)
+  {
+    for(x = topLeft.x_; x < bottomRight.x_; ++x)
+    {
+      if(ScreenBoundCheck( x + xoffset, y + yoffset ) && image->chars[x + image->width * y] != 255)
+      {
+        DOUBLE_BUFFER[(x + xoffset) + BUFFERWIDTH * (y + yoffset)].Char.AsciiChar =
+          image->chars[x + image->width * y];
+        DOUBLE_BUFFER[(x + xoffset) + BUFFERWIDTH * (y + yoffset)].Attributes =
+          image->colors[x + image->width * y];
+      }
+    }
+  }
+
+  return RETURN_SUCCESS;
+}
+
+//
+// WriteImageToImage
+// Purpose: Draws an image onto another image
+//
+RETURN_TYPE WriteImageToImage( const char *drawOnMe, const char *drawWithMe, int xOffset, int yOffset )
+{
+  int x, y;
+  CHAR *thisChar;
+  COL *thisColor;
+  IMAGE *drawOnMeImage = AE_FindImage( drawOnMe );
+  IMAGE *drawWithMeImage = AE_FindImage( drawWithMe );
+  
+  // Return failure if images not found in lookup
+  if(!drawOnMeImage || !drawWithMeImage)
+  {
+    return RETURN_FAILURE;
+  }
+
+  // Make sure there's actually room to perform writing
+  if(!(drawOnMeImage->height >= drawWithMeImage->height + yOffset &&
+       drawOnMeImage->width  >= drawWithMeImage->width  + xOffset))
+  {
+    // The draw with me image + offset went out of bounds of the
+    // draw on me image!
+    return RETURN_FAILURE;
+  }
+
+  for(y = 0; y < drawWithMeImage->height; ++y)
+  {
+    for(x = 0; x < drawWithMeImage->width; ++x)
+    {
+      thisChar = CharAt( drawOnMeImage, x + xOffset, y + yOffset );
+      thisColor = ColorAt( drawOnMeImage, x + xOffset, y + yOffset );
+      *thisChar = *(CharAt( drawWithMeImage, x, y ));
+      *thisColor = *(ColorAt( drawWithMeImage, x, y ));
+    }
+  }
+
+  return RETURN_SUCCESS;
+}
+
 //
 // WriteCharToBuffer
 // Purpose: Writes a single character to the buffer
@@ -210,6 +286,7 @@ void WriteCharToBuffer( CHAR character, COL color, int x, int y )
   DOUBLE_BUFFER[x + BUFFERWIDTH * y].Attributes = color;
   return;
 }
+
 //
 // WriteStringToScreen
 // Purpose: Writes a null terminated string to the buffer, with
@@ -224,4 +301,17 @@ void WriteStringToScreen( char string[], int x, int y )
     DOUBLE_BUFFER[x + BUFFERWIDTH * y].Char.AsciiChar = string[i];
     DOUBLE_BUFFER[x + BUFFERWIDTH * y].Attributes = 7;
   }
+}
+
+//
+// WriteCharToImage
+// Purpose: Writes a character at a coordinate to an image.
+//
+RETURN_TYPE WriteCharToImage( IMAGE *image, CHAR character, COL color, int x, int y )
+{
+  CHAR *thisChar = CharAt( image, x, y );
+  COL *thisCol = ColorAt( image, x, y );
+  *thisChar = character;
+  *thisCol = color;
+  return RETURN_SUCCESS;
 }

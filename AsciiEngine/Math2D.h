@@ -18,6 +18,11 @@
 #include "Shapes.h"
 #include "GlobalDefines.h"
 
+typedef struct _AE_COORD
+{
+  int x_, y_;
+} AE_COORD;
+
 //
 // StaticCircleToStaticRectangle
 // Purpose: Detects collision between a static circle and static
