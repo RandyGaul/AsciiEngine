@@ -12,11 +12,18 @@
 #ifndef GAMESTATELISTH
 #define GAMESTATELISTH
 
+#include "GlobalDefines.h"
+#include "TestLevel.h"
+#include "TestLevel2.h"
+#include "MapEditor.h"
+
 enum GameState_
 {
   Restart,
   Quit,
-	MainMenu,
+  TestLevel,
+  TestLevel2,
+  MapEditor,
 } GAME_STATE;
 
 #endif // GAMESTATELISTH

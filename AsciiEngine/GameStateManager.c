@@ -12,7 +12,6 @@
 
 #include "GameStateList.h"
 #include "GameStateManager.h"
-#include "MainMenu.h"
 #include "GlobalDefines.h"
 
 // These three states are global variables for holding the values of states.
@@ -21,12 +20,12 @@ stateIndicator previousState;
 stateIndicator currentState;
 
 // Globals for function pointers for any state. To point at functions in other files.
-int (*Load)( void );
-int (*Initialize)( void );
-int (*Update)( );
-int (*Draw)( void );
-int (*Free)( void );
-int (*Unload)( void );
+RETURN_TYPE (*Load)( void );
+RETURN_TYPE (*Initialize)( void );
+RETURN_TYPE (*Update)( );
+RETURN_TYPE (*Draw)( void );
+RETURN_TYPE (*Free)( void );
+RETURN_TYPE (*Unload)( void );
 
 // Initialize the Game State Manager by pointing the three states at an initial state.
 int GSM_Initialize( stateIndicator initVal )
@@ -44,13 +43,29 @@ int GSM_Update( void )
 {
 	switch(currentState)
 	{
-	case MainMenu:
-		Load = &MainMenuLoad;
-		Initialize = &MainMenuInitialize;
-		Update = &MainMenuUpdate;
-		Draw = &MainMenuDraw;
-		Free = &MainMenuFree;
-		Unload = &MainMenuUnload;
+	case TestLevel:
+		Load = &TestLevelLoad;
+		Initialize = &TestLevelInit;
+		Update = &TestLevelUpdate;
+		Draw = &TestLevelDraw;
+		Free = &TestLevelFree;
+		Unload = &TestLevelUnload;
+		break;
+	case TestLevel2:
+		Load = &TestLevel2Load;
+		Initialize = &TestLevel2Init;
+		Update = &TestLevel2Update;
+		Draw = &TestLevel2Draw;
+		Free = &TestLevel2Free;
+		Unload = &TestLevel2Unload;
+		break;
+	case MapEditor:
+		Load = &MapEditorLoad;
+		Initialize = &MapEditorInit;
+		Update = &MapEditorUpdate;
+		Draw = &MapEditorDraw;
+		Free = &MapEditorFree;
+		Unload = &MapEditorUnload;
 		break;
 		/*
 	case Template:

@@ -12,17 +12,18 @@
 #ifndef FRAMERATECONTROLLERH
 #define FRAMERATECONTROLLERH
 
-typedef unsigned int millisecond;
+#include "GlobalDefines.h"
 
 void FrameStart( void );
 float dtCalculate( void );
-int FPSLimit( unsigned int FPS );
+BOOL FPSLimit( void );
 void dtCap( float *dt );
 void SetStateStartTime( void );
-unsigned int GetStateStartTime( void );
+float GetStateStartTime( void );
 void SetDT( float deltaTime );
 float GetDT( void );
-millisecond GetTimeAtFrameStart( void );
-millisecond GetCurrentGameTime( void );
+float GetTimeAtFrameStart( void );
+float GetCurrentGameTime( void );
+RETURN_TYPE InitFrameRateController( void );
 
 #endif  FRAMERATECONTROLLERH

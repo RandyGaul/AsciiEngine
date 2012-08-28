@@ -92,4 +92,6 @@ void UpdateInput( void );
 //
 BOOL IsKeyPressed( VIRTUAL_KEY key );
 
+void ClearLastMouseClick( void );
+
 #endif  INPUTH

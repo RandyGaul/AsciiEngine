@@ -14,11 +14,12 @@
 #include "FrameRateController.h"
 #include "Input.h"
 #include "Random.h"
+#include "Registration.h" // Register entity classes and entity components
 
 int main(void)
 {
   // Initializes the graphics settings.
-  InitGraphics( 100, 60 );
+  InitGraphics( CLIENT_WIDTH, CLIENT_HEIGHT );
 
   // Initializes the console.
   // The first string is the name of your window. The second string is the
@@ -26,7 +27,7 @@ int main(void)
   // though you can try strings "Lucida Console" or "Consolas" as they are
   // optional fonts in Windows 7 and Vista. A custom font can be created and
   // implemented if you're so inclined.
-  initConsole(TEXT("AsciiEngine V1.01"), TEXT(""), 8, 8 );
+  initConsole(TEXT("Ascii Engine v1.02"), TEXT("Sunkure Font"), 8, 8 ); 
 
   // Seed PRNG
   // http://cecilsunkure.blogspot.com/2010/11/prngs-psuedo-random-number-generator.html
@@ -34,7 +35,14 @@ int main(void)
 
   // Set the starting state
   // http://cecilsunkure.blogspot.com/2012/02/game-program-design-game-state-manager.html
-  GSM_Initialize( MainMenu );
+  GSM_Initialize( TestLevel );
+
+  InitFrameRateController( );
+
+  // Registration of creators to the creator table
+  // http://cecilsunkure.blogspot.com/2012/08/game-object-factory-distributed-factory.html
+  RegisterEntityClasses( );
+  RegisterEntityComponents( );
 
 	while (currentState != Quit)
 	{
@@ -53,7 +61,7 @@ int main(void)
 			GSM_Update( );
 			Load( );
 		}
-
+    
 		Initialize( );
 		SetStateStartTime( );
 
@@ -65,9 +73,10 @@ int main(void)
 
 			for (;;)
 			{
+        assert(_CrtCheckMemory());
 				SetDT( dtCalculate( ) ); // Set's dt for the function GetDT
 				Update( ); // calculate change in time since last call, for update
-				if (FPSLimit( TIME_BETWEEN_FRAMES_IN_MILLISECONDS ))
+				if (FPSLimit( ))
 				{
 					Draw( );
 					break;

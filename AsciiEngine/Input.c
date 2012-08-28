@@ -50,6 +50,79 @@ BOOL IsKeyPressed( VIRTUAL_KEY key )
       return GLOBAL_INPUTS.L_Button;
     case VK_RBUTTON:
       return GLOBAL_INPUTS.R_Button;
+    case VK_A:
+      return GLOBAL_INPUTS.Key_A;
+    case VK_B:
+      return GLOBAL_INPUTS.Key_B;
+    case VK_C:
+      return GLOBAL_INPUTS.Key_C;
+    case VK_D:
+      return GLOBAL_INPUTS.Key_D;
+    case VK_E:
+      return GLOBAL_INPUTS.Key_E;
+    case VK_F:
+      return GLOBAL_INPUTS.Key_F;
+    case VK_G:
+      return GLOBAL_INPUTS.Key_G;
+    case VK_H:
+      return GLOBAL_INPUTS.Key_H;
+    case VK_I:
+      return GLOBAL_INPUTS.Key_I;
+    case VK_J:
+      return GLOBAL_INPUTS.Key_J;
+    case VK_K:
+      return GLOBAL_INPUTS.Key_K;
+    case VK_L:
+      return GLOBAL_INPUTS.Key_L;
+    case VK_M:
+      return GLOBAL_INPUTS.Key_M;
+    case VK_N:
+      return GLOBAL_INPUTS.Key_N;
+    case VK_O:
+      return GLOBAL_INPUTS.Key_O;
+    case VK_P:
+      return GLOBAL_INPUTS.Key_P;
+    case VK_Q:
+      return GLOBAL_INPUTS.Key_Q;
+    case VK_R:
+      return GLOBAL_INPUTS.Key_R;
+    case VK_S:
+      return GLOBAL_INPUTS.Key_S;
+    case VK_T:
+      return GLOBAL_INPUTS.Key_T;
+    case VK_U:
+      return GLOBAL_INPUTS.Key_U;
+    case VK_V:
+      return GLOBAL_INPUTS.Key_V;
+    case VK_W:
+      return GLOBAL_INPUTS.Key_W;
+    case VK_X:
+      return GLOBAL_INPUTS.Key_X;
+    case VK_Y:
+      return GLOBAL_INPUTS.Key_Y;
+    case VK_Z:
+      return GLOBAL_INPUTS.Key_Z;
+      return GLOBAL_INPUTS.Key_I;
+    case VK_0:
+      return GLOBAL_INPUTS.Key_0;
+    case VK_1:
+      return GLOBAL_INPUTS.Key_1;
+    case VK_2:
+      return GLOBAL_INPUTS.Key_2;
+    case VK_3:
+      return GLOBAL_INPUTS.Key_3;
+    case VK_4:
+      return GLOBAL_INPUTS.Key_4;
+    case VK_5:
+      return GLOBAL_INPUTS.Key_5;
+    case VK_6:
+      return GLOBAL_INPUTS.Key_6;
+    case VK_7:
+      return GLOBAL_INPUTS.Key_7;
+    case VK_8:
+      return GLOBAL_INPUTS.Key_8;
+    case VK_9:
+      return GLOBAL_INPUTS.Key_9;
     default:
       return FALSE;
   }
@@ -115,6 +188,114 @@ void UpdateInput( void )
 				    case VK_SPACE:
 					    GLOBAL_INPUTS.Key_Space = TRUE;
               break;
+            case VK_A:
+              GLOBAL_INPUTS.Key_A = TRUE;
+              break;
+            case VK_B:
+              GLOBAL_INPUTS.Key_B = TRUE;
+              break;
+            case VK_C:
+              GLOBAL_INPUTS.Key_C = TRUE;
+              break;
+            case VK_D:
+              GLOBAL_INPUTS.Key_D = TRUE;
+              break;
+            case VK_E:
+              GLOBAL_INPUTS.Key_E = TRUE;
+              break;
+            case VK_F:
+              GLOBAL_INPUTS.Key_F = TRUE;
+              break;
+            case VK_G:
+              GLOBAL_INPUTS.Key_G = TRUE;
+              break;
+            case VK_H:
+              GLOBAL_INPUTS.Key_H = TRUE;
+              break;
+            case VK_I:
+              GLOBAL_INPUTS.Key_I = TRUE;
+              break;
+            case VK_J:
+              GLOBAL_INPUTS.Key_J = TRUE;
+              break;
+            case VK_K:
+              GLOBAL_INPUTS.Key_K = TRUE;
+              break;
+            case VK_L:
+              GLOBAL_INPUTS.Key_L = TRUE;
+              break;
+            case VK_M:
+              GLOBAL_INPUTS.Key_M = TRUE;
+              break;
+            case VK_N:
+              GLOBAL_INPUTS.Key_N = TRUE;
+              break;
+            case VK_O:
+              GLOBAL_INPUTS.Key_O = TRUE;
+              break;
+            case VK_P:
+              GLOBAL_INPUTS.Key_P = TRUE;
+              break;
+            case VK_Q:
+              GLOBAL_INPUTS.Key_Q = TRUE;
+              break;
+            case VK_R:
+              GLOBAL_INPUTS.Key_R = TRUE;
+              break;
+            case VK_S:
+              GLOBAL_INPUTS.Key_S = TRUE;
+              break;
+            case VK_T:
+              GLOBAL_INPUTS.Key_T = TRUE;
+              break;
+            case VK_U:
+              GLOBAL_INPUTS.Key_U = TRUE;
+              break;
+            case VK_V:
+              GLOBAL_INPUTS.Key_V = TRUE;
+              break;
+            case VK_W:
+              GLOBAL_INPUTS.Key_W = TRUE;
+              break;
+            case VK_X:
+              GLOBAL_INPUTS.Key_X = TRUE;
+              break;
+            case VK_Y:
+              GLOBAL_INPUTS.Key_Y = TRUE;
+              break;
+            case VK_Z:
+              GLOBAL_INPUTS.Key_Z = TRUE;
+              break;
+            case VK_0:
+              GLOBAL_INPUTS.Key_0 = TRUE;
+              break;
+            case VK_1:
+              GLOBAL_INPUTS.Key_1 = TRUE;
+              break;
+            case VK_2:
+              GLOBAL_INPUTS.Key_2 = TRUE;
+              break;
+            case VK_3:
+              GLOBAL_INPUTS.Key_3 = TRUE;
+              break;
+            case VK_4:
+              GLOBAL_INPUTS.Key_4 = TRUE;
+              break;
+            case VK_5:
+              GLOBAL_INPUTS.Key_5 = TRUE;
+              break;
+            case VK_6:
+              GLOBAL_INPUTS.Key_6 = TRUE;
+              break;
+            case VK_7:
+              GLOBAL_INPUTS.Key_7 = TRUE;
+              break;
+            case VK_8:
+              GLOBAL_INPUTS.Key_8 = TRUE;
+              break;
+            case VK_9:
+              GLOBAL_INPUTS.Key_9 = TRUE;
+              break;
           }
         }
         else
@@ -147,6 +328,113 @@ void UpdateInput( void )
 					    break;
 				    case VK_SPACE:
 					    GLOBAL_INPUTS.Key_Space = FALSE;
+              break;case VK_A:
+              GLOBAL_INPUTS.Key_A = FALSE;
+              break;
+            case VK_B:
+              GLOBAL_INPUTS.Key_B = FALSE;
+              break;
+            case VK_C:
+              GLOBAL_INPUTS.Key_C = FALSE;
+              break;
+            case VK_D:
+              GLOBAL_INPUTS.Key_D = FALSE;
+              break;
+            case VK_E:
+              GLOBAL_INPUTS.Key_E = FALSE;
+              break;
+            case VK_F:
+              GLOBAL_INPUTS.Key_F = FALSE;
+              break;
+            case VK_G:
+              GLOBAL_INPUTS.Key_G = FALSE;
+              break;
+            case VK_H:
+              GLOBAL_INPUTS.Key_H = FALSE;
+              break;
+            case VK_I:
+              GLOBAL_INPUTS.Key_I = FALSE;
+              break;
+            case VK_J:
+              GLOBAL_INPUTS.Key_J = FALSE;
+              break;
+            case VK_K:
+              GLOBAL_INPUTS.Key_K = FALSE;
+              break;
+            case VK_L:
+              GLOBAL_INPUTS.Key_L = FALSE;
+              break;
+            case VK_M:
+              GLOBAL_INPUTS.Key_M = FALSE;
+              break;
+            case VK_N:
+              GLOBAL_INPUTS.Key_N = FALSE;
+              break;
+            case VK_O:
+              GLOBAL_INPUTS.Key_O = FALSE;
+              break;
+            case VK_P:
+              GLOBAL_INPUTS.Key_P = FALSE;
+              break;
+            case VK_Q:
+              GLOBAL_INPUTS.Key_Q = FALSE;
+              break;
+            case VK_R:
+              GLOBAL_INPUTS.Key_R = FALSE;
+              break;
+            case VK_S:
+              GLOBAL_INPUTS.Key_S = FALSE;
+              break;
+            case VK_T:
+              GLOBAL_INPUTS.Key_T = FALSE;
+              break;
+            case VK_U:
+              GLOBAL_INPUTS.Key_U = FALSE;
+              break;
+            case VK_V:
+              GLOBAL_INPUTS.Key_V = FALSE;
+              break;
+            case VK_W:
+              GLOBAL_INPUTS.Key_W = FALSE;
+              break;
+            case VK_X:
+              GLOBAL_INPUTS.Key_X = FALSE;
+              break;
+            case VK_Y:
+              GLOBAL_INPUTS.Key_Y = FALSE;
+              break;
+            case VK_Z:
+              GLOBAL_INPUTS.Key_Z = FALSE;
+              break;
+            case VK_0:
+              GLOBAL_INPUTS.Key_0 = FALSE;
+              break;
+            case VK_1:
+              GLOBAL_INPUTS.Key_1 = FALSE;
+              break;
+            case VK_2:
+              GLOBAL_INPUTS.Key_2 = FALSE;
+              break;
+            case VK_3:
+              GLOBAL_INPUTS.Key_3 = FALSE;
+              break;
+            case VK_4:
+              GLOBAL_INPUTS.Key_4 = FALSE;
+              break;
+            case VK_5:
+              GLOBAL_INPUTS.Key_5 = FALSE;
+              break;
+            case VK_6:
+              GLOBAL_INPUTS.Key_6 = FALSE;
+              break;
+            case VK_7:
+              GLOBAL_INPUTS.Key_7 = FALSE;
+              break;
+            case VK_8:
+              GLOBAL_INPUTS.Key_8 = FALSE;
+              break;
+            case VK_9:
+              GLOBAL_INPUTS.Key_9 = FALSE;
               break;
           }
         }
@@ -175,4 +463,10 @@ void UpdateInput( void )
     FlushConsoleInputBuffer( INPUT_HANDLE );
     free( eventBuffer );
   }
+}
+
+void ClearLastMouseClick( void )
+{
+  GLOBAL_INPUTS.xPosAtLastRightClick = -1;
+  GLOBAL_INPUTS.yPosAtLastRightClick = -1;
 }

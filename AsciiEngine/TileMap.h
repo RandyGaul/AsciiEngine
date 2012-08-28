@@ -12,11 +12,14 @@
 
 #include "GlobalDefines.h"
 #include "Shapes.h"
+#include "EntityFactory.h"
 
 #define	COLLISION_LEFT		0x00000001	//0001
 #define	COLLISION_RIGHT		0x00000002	//0010
 #define	COLLISION_TOP		  0x00000004	//0100
 #define	COLLISION_BOTTOM	0x00000008	//1000
+
+#define TILE_WIDTH 1.f
 
 typedef int COLLISION_FLAG;
 typedef int CELL;
@@ -43,10 +46,7 @@ typedef struct
   MAPDATA *COLLISION_MAP; // Contains the current collision data array
 } TILE_MAP_SYSTEM_DATA;
 
-extern MAPDATA *MapData;
-extern MAPDATA *BinaryCollisionData;
-extern int MAP_WIDTH;
-extern int MAP_HEIGHT;
+extern TILE_MAP_SYSTEM_DATA TILE_MAP_SYSTEM;
 
 //
 // MapBoundCheck
@@ -79,6 +79,7 @@ RETURN_TYPE ImportMAPDATA( const char *FileName );
 //          a the current collision array.
 //
 COLLISION_FLAG CheckHotspotCollision( const AE_RECT rect );
+BOOL HotSpotCollisionCheck( VECTOR2D hotspot );
 
 //
 // FreeMap
@@ -97,5 +98,19 @@ RETURN_TYPE DrawMap( void );
 // Purpose: Initialize various aspects of the MapSystem for tile mapping
 //
 RETURN_TYPE MapSystemInit( const char *FileName );
+
+//
+// DimensionClampX
+// Returns a clamped version of a coordinate
+//
+int DimensionClampX( int x );
+
+//
+// DimensionClampy
+// Returns a clamped version of a coordinate
+//
+int DimensionClampY( int y );
+
+RETURN_TYPE CreateTileEntitiesFromMap( void );
 
 #endif  TILEMAPH

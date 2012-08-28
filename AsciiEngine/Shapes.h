@@ -23,8 +23,11 @@ typedef struct _AE_RECT
   VECTOR2D center_;
   float width_;
   float height_;
-  float halfWidth_;
-  float halfHeight_;
 } AE_RECT;
+
+typedef struct _AE_COORD
+{
+  int x_, y_;
+} AE_COORD;
 
 #endif  SHAPESH

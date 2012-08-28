@@ -89,7 +89,6 @@ RETURN_TYPE LoadAllArtAssets( const char *directory )
 IMAGE *LoadAEArtFile( const char *folder, const char *fileName )
 {
   FILE *fp;
-  OPENFILENAMEA ofn = { 0 };
   IMAGE *image = NULL;
 
   // Allocate space to concatenate the folder and the fileName together
@@ -113,13 +112,15 @@ IMAGE *LoadAEArtFile( const char *folder, const char *fileName )
     fscanf_s( fp, "%d", &bottomRight.y_ );
 
     image = AllocateImage( fileName, bottomRight.x_, bottomRight.y_ );
-
+    
     for(y = 0; y < bottomRight.y_; ++y)
     {
       for(x = 0; x < bottomRight.x_; ++x)
       {
+        int copy = 0;
         thisChar = CharAt( image, x, y );
-        fscanf_s( fp, "%d", thisChar );
+        fscanf_s( fp, "%d", &copy );
+        *thisChar = (char)copy;
       }
     }
 
@@ -127,8 +128,10 @@ IMAGE *LoadAEArtFile( const char *folder, const char *fileName )
     {
       for(x = 0; x < bottomRight.x_; ++x)
       {
+        int copy = 0;
         thisColor = ColorAt( image, x, y );
-        fscanf_s( fp, "%d", thisColor );
+        fscanf_s( fp, "%d", &copy );
+        *thisColor = (char)copy;
       }
     }
     fclose( fp );

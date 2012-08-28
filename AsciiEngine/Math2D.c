@@ -10,6 +10,9 @@
 #include "Math2D.h"
 #include "GlobalDefines.h"
 
+// Used to snap to nearest cell
+#define SNAPPING_COMPARITOR 0.5f
+
 //
 // StaticCircleToStaticRectangle
 // Purpose: Detects collision between a static circle and static
@@ -83,10 +86,10 @@ BOOL StaticPointToStaticRect( const VECTOR2D *point, const AE_RECT *rect )
   float halfH = (0.5f * rect->height_);
 
   // Perform various checks required as detailed in documentation (see top of file)
-  return (point->x_ <= (rect->center_.x_ + halfW) &&
-          point->x_ >= (rect->center_.x_ - halfW) &&
-          point->y_ <= (rect->center_.y_ + halfH) &&
-          point->y_ >= (rect->center_.y_ - halfH)) ? TRUE : FALSE;
+  return (point->x_ < (rect->center_.x_ + halfW) &&
+          point->x_ > (rect->center_.x_ - halfW) &&
+          point->y_ < (rect->center_.y_ + halfH) &&
+          point->y_ > (rect->center_.y_ - halfH)) ? TRUE : FALSE;
 }
 
 //
@@ -123,7 +126,7 @@ BOOL StaticRectToStaticRect( const AE_RECT *rectA, const AE_RECT *rectB )
   float bottomB = rectB->center_.y_ - 0.5f * rectB->height_;
 
   // Perform various checks required, see documentation for details (top of file)
-	return (leftA > rightB || leftB > rightA || topA < bottomB || topB < bottomA) ? FALSE : TRUE;
+  return (leftA >= rightB || leftB >= rightA || topA <= bottomB || topB <= bottomA) ? FALSE : TRUE;
 }
 
 //
@@ -151,5 +154,48 @@ int FloatToIntRoundUp( float val )
 // 
 void SnapToCell( float *coordinate )
 {
-	*coordinate = ((float)((int)(*coordinate))) + .5f;
+	*coordinate = (float)((int)(*coordinate + 0.5f));
+}
+
+//
+// BoundCheck
+// Purpose: Checks to make sure a coordinate is within a specific bound
+//
+BOOL BoundCheck( AE_COORD coord, int boundTop, int boundLeft, int boundBottom, int boundRight )
+{
+  return (coord.x_ <= boundRight && coord.x_ >= boundLeft && coord.y_ <= boundBottom && coord.y_ >= boundTop) ? TRUE : FALSE;
+}
+
+//
+// BoundCheck
+// Purpose: Checks to make sure a coordinate is within a specific bound
+//
+BOOL BoundCheck2( AE_COORD coord, AE_COORD topLeft, AE_COORD bottomRight )
+{
+  return (coord.x_ <= bottomRight.x_ &&
+    coord.x_ >= topLeft.x_ &&
+    coord.y_ <= bottomRight.y_ &&
+    coord.y_ >= topLeft.y_) ? TRUE : FALSE;
+}
+
+//
+// SnapVectorToRect
+// Purpose: Snaps a point within a rectangle boundary.
+//
+void SnapVectorToRect( VECTOR2D *vec, AE_RECT *rect )
+{
+  float left = rect->center_.x_ - 0.5f * rect->width_;
+	float right = rect->center_.x_ + 0.5f * rect->width_;
+  float top = rect->center_.y_ + 0.5f * rect->height_;
+  float bottom = rect->center_.y_ - 0.5f * rect->height_;
+
+  if(vec->x_ > right)
+    vec->x_ = right;
+  else if(vec->x_ < left)
+    vec->x_ = left;
+
+  if(vec->y_ < bottom)
+    vec->y_ = bottom;
+  else if(vec->y_ > top)
+    vec->y_ = top;
 }

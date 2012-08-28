@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Systems">
+      <UniqueIdentifier>{ad66b061-10fc-48e3-abe7-831e42f42577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{aacfb469-83e5-4c5d-85d2-0aeead095126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Actions">
+      <UniqueIdentifier>{bd4075b4-92da-4c6e-9354-40431888adbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components">
+      <UniqueIdentifier>{2fdb1e9c-526d-4668-a778-50d61083e3b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Graphics">
+      <UniqueIdentifier>{6322fd7d-8132-4b71-9e5a-69bf6856dbdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Physics">
+      <UniqueIdentifier>{5af181ce-145a-46cd-b24d-387fbc4fb59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Position">
+      <UniqueIdentifier>{467cc638-c9e4-4115-957c-ea9597b186ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Collision">
+      <UniqueIdentifier>{d7518f2b-b369-4b37-9748-b8e1af373c9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Player">
+      <UniqueIdentifier>{37c175bd-8e0c-430e-93f5-d62a2bcfa3f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\EntityManagement">
+      <UniqueIdentifier>{2c02e946-5361-4dba-9215-fca9dbbf3f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\GameEntities">
+      <UniqueIdentifier>{e5848ad3-62ef-4719-8516-4ade2258d333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VectorLib">
+      <UniqueIdentifier>{4c0ba3ad-25dc-4b96-8bf7-0f4960b25654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MathLib">
+      <UniqueIdentifier>{1c50cf78-172b-4615-84cb-9824d87d2646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameStates">
+      <UniqueIdentifier>{93a71909-837a-42e1-8b5d-e448abb031a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{6db1f218-b8c7-454f-9468-3c5732e53842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\ActionList">
+      <UniqueIdentifier>{e5305a29-3dd2-489b-8aef-46724b39cf62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Hitpoints">
+      <UniqueIdentifier>{016bf804-49f2-4ceb-8e53-2d0d98bcc32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Inventory">
+      <UniqueIdentifier>{bf9d0add-1b30-4739-87f6-323a8cd92c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components\Brain">
+      <UniqueIdentifier>{80640197-c7f1-4c5a-9f9b-ceb988999b55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\TileMap">
+      <UniqueIdentifier>{3cfd0f27-a392-4f6f-8895-6cbc493b9c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Console">
+      <UniqueIdentifier>{f4af665b-b6cd-447f-ab9a-a0475c0095ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameStates\StateManagement">
+      <UniqueIdentifier>{c478fadf-9981-4cf5-950e-ac6e22757f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Serialization">
+      <UniqueIdentifier>{c492d197-b5c0-4abd-87e9-c29dca6d3050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\LinkedList">
+      <UniqueIdentifier>{dad52a6b-29c0-4d20-b01e-da917108680d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\HashTable">
+      <UniqueIdentifier>{52dac46e-7133-41f6-979e-8dfeeaff1006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\OpenFile">
+      <UniqueIdentifier>{6001b023-2423-4461-b0fa-9c014f5d27d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\ButtonList">
+      <UniqueIdentifier>{ec8a0c1a-fb0e-4141-9325-8ff2d6c22920}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\FrameRate">
+      <UniqueIdentifier>{d61e53db-9608-404c-b2e5-4f5c62d336a3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GlobalDefines.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Source Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Source Files\Entities\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source Files\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Cloud.h">
+      <Filter>Source Files\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsComponent.h">
+      <Filter>Source Files\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Source Files\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Source Files\Entities\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Source Files\Entities\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Source Files\Entities\Components\Position</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionComponent.h">
+      <Filter>Source Files\Entities\Components\Position</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Source Files\Entities\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Source Files\Entities\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\Entities\Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Source Files\Entities\Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCreator.h">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCreatorTable.h">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Registration.h">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticBackground.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Source Files\VectorLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Math2D.h">
+      <Filter>Source Files\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes.h">
+      <Filter>Source Files\MathLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Source Files\Systems\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLevel.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageTable.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Loci.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleEnemy.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionList.h">
+      <Filter>Source Files\Entities\Components\ActionList</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionListComponent.h">
+      <Filter>Source Files\Entities\Components\ActionList</Filter>
+    </ClInclude>
+    <ClInclude Include="Hitpoints.h">
+      <Filter>Source Files\Entities\Components\Hitpoints</Filter>
+    </ClInclude>
+    <ClInclude Include="HitpointsComponent.h">
+      <Filter>Source Files\Entities\Components\Hitpoints</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageDealer.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Properties.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageText.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryComponent.h">
+      <Filter>Source Files\Entities\Components\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallInventory.h">
+      <Filter>Source Files\Entities\Components\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemList.h">
+      <Filter>Source Files\Entities\Components\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemParticle.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="BrainComponent.h">
+      <Filter>Source Files\Entities\Components\Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="JumperLittle.h">
+      <Filter>Source Files\Entities\Components\Brain</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLevel2.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleFuncs.h">
+      <Filter>Source Files\Systems\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Source Files\Systems\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateList.h">
+      <Filter>Source Files\GameStates\StateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Source Files\GameStates\StateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditor.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialize.h">
+      <Filter>Source Files\Systems\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Source Files\Systems\LinkedList</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenFile.h">
+      <Filter>Source Files\Systems\OpenFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Source Files\Systems\ButtonList</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameRateController.h">
+      <Filter>Source Files\Systems\FrameRate</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHash.h">
+      <Filter>Source Files\Systems\HashTable</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.c">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.c">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.c">
+      <Filter>Source Files\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Cloud.c">
+      <Filter>Source Files\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.c">
+      <Filter>Source Files\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.c">
+      <Filter>Source Files\Entities\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Position.c">
+      <Filter>Source Files\Entities\Components\Position</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.c">
+      <Filter>Source Files\Entities\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.c">
+      <Filter>Source Files\Entities\Components\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityCreatorTable.c">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFactory.c">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.c">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Registration.c">
+      <Filter>Source Files\Entities\EntityManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticBackground.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.c">
+      <Filter>Source Files\VectorLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Math2D.c">
+      <Filter>Source Files\MathLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.c">
+      <Filter>Source Files\Systems\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevel.c">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.c">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.c">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTable.c">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Loci.c">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleEnemy.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionList.c">
+      <Filter>Source Files\Entities\Components\ActionList</Filter>
+    </ClCompile>
+    <ClCompile Include="Hitpoints.c">
+      <Filter>Source Files\Entities\Components\Hitpoints</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageDealer.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageText.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallInventory.c">
+      <Filter>Source Files\Entities\Components\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemParticle.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="JumperLittle.c">
+      <Filter>Source Files\Entities\Components\Brain</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevel2.c">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleFuncs.c">
+      <Filter>Source Files\Systems\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.c">
+      <Filter>Source Files\Systems\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.c">
+      <Filter>Source Files\GameStates\StateManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditor.c">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.c">
+      <Filter>Source Files\Entities\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="Serialize.c">
+      <Filter>Source Files\Systems\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="HashTable.h">
+      <Filter>Source Files\Systems\HashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenFile.c">
+      <Filter>Source Files\Systems\OpenFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.c">
+      <Filter>Source Files\Systems\ButtonList</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameRateController.c">
+      <Filter>Source Files\Systems\FrameRate</Filter>
+    </ClCompile>
+    <ClCompile Include="StringHash.c">
+      <Filter>Source Files\Systems\HashTable</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

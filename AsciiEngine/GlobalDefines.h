@@ -3,11 +3,6 @@
 // See the file LICENSE.txt for copying permission.
 // 
 // Original Author: Randy Gaul
-// Takes a pointer and returns a pointer offset in bytes
-#define PtrAdd( ptr, offset ) \
-  (((char *)ptr) + offset)
-
-#define DT_MAX 60.0f
 // Date:   7/3/2012
 // Contact: r.gaul@digipen.edu
 ////////////////////////////////////////////////////
@@ -16,14 +11,49 @@
 #define GLOBALDEFINESH
 
 #include <windows.h>
+#include <assert.h>
+#include <crtdbg.h>
+#include "Properties.h"
 
-#define TIME_BETWEEN_FRAMES_IN_MILLISECONDS 20
+#define CLIENT_WIDTH        75
+#define CLIENT_WIDTH_HALF   37.5f
+#define CLIENT_HEIGHT       50
+#define CLIENT_HEIGHT_HALF  25.0f
 
+#define FPS_LIMIT ((float)( 30 ))
 // Compile switch for displaying (or not) the FPS onto the screen
 #define DISPLAY_FPS
 
 #define TRUE 1
 #define FALSE 0
+
+#define TRANSPERANT 255
+
+#define GRAVITY 80.f
+#define PLAYER_JUMP_HEIGHT -33.0f
+#define LEFT_RIGHT_SPEED 15.f
+
+// CAMERA STUFF
+#define ENABLE_CAM 1
+#define DISABLE_CAM 0
+#define CAMOFFX ((self->base.enableCam) ? 0 : GLOBAL_CAM.center.x_)
+#define CAMOFFY ((self->base.enableCam) ? 0 : GLOBAL_CAM.center.y_ + 1)
+
+// VISUALS
+#define DAMAGE_TEXT_FLOAT_VEL -5.f
+#define DAMAGE_TEXT_FLOAT_TIME 2.f
+#define ITEM_PARTICLE_SPAWN_COUNT 6
+#define ITEM_PARTICLE_VELOCITY_RANGE 10
+#define ITEM_PARTICLE_DELAY (float)RandomInt( 1, 4 ) / 8.f
+
+// UI stuff
+#define INVENTORY_BUTTON_DEBOUNCE_TIME .1f
+
+// Takes a pointer and returns a pointer offset in bytes
+#define PtrAdd( ptr, offset ) \
+  (((char *)ptr) + offset)
+
+#define DT_MAX 60.0f
 
 typedef enum
 {
@@ -93,6 +123,16 @@ typedef enum
 // http://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
 typedef enum _VIRTUAL_KEY
 {
+  VK_0 = 0x30,
+  VK_1,
+  VK_2,
+  VK_3,
+  VK_4,
+  VK_5,
+  VK_6,
+  VK_7,
+  VK_8,
+  VK_9,
   VK_A = 0x41,
   VK_B,
   VK_C,

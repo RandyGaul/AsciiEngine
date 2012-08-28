@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>AsciiEngine</ProjectName>
+    <ProjectGuid>{D87A83AF-D641-4880-A687-6140A241AC3F}</ProjectGuid>
+    <RootNamespace>AsciiGame</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PreprocessToFile>false</PreprocessToFile>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="ActionList.h" />
+    <ClInclude Include="ActionListComponent.h" />
+    <ClInclude Include="BrainComponent.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="DamageDealer.h" />
+    <ClInclude Include="DamageText.h" />
+    <ClInclude Include="GlobalDefines.h" />
+    <ClInclude Include="ConsoleFuncs.h" />
+    <ClInclude Include="FrameRateController.h" />
+    <ClInclude Include="GameStateList.h" />
+    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="Hitpoints.h" />
+    <ClInclude Include="HitpointsComponent.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="InventoryComponent.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemList.h" />
+    <ClInclude Include="JumperLittle.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="MapEditor.h" />
+    <ClInclude Include="OpenFile.h" />
+    <ClInclude Include="ItemParticle.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Properties.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="Serialize.h" />
+    <ClInclude Include="SimpleEnemy.h" />
+    <ClInclude Include="SmallInventory.h" />
+    <ClInclude Include="StringHash.h" />
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Cloud.h" />
+    <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="PositionComponent.h" />
+    <ClInclude Include="CollisionComponent.h" />
+    <ClInclude Include="Square.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="EntityCreator.h" />
+    <ClInclude Include="EntityCreatorTable.h" />
+    <ClInclude Include="EntityFactory.h" />
+    <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="Registration.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="Message.h" />
+    <ClInclude Include="StaticBackground.h" />
+    <ClInclude Include="TestLevel2.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Math2D.h" />
+    <ClInclude Include="Shapes.h" />
+    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="ImageTable.h" />
+    <ClInclude Include="Loci.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ActionList.c" />
+    <ClCompile Include="Button.c" />
+    <ClCompile Include="DamageDealer.c" />
+    <ClCompile Include="DamageText.c" />
+    <ClCompile Include="Entity.c" />
+    <ClCompile Include="HashTable.h" />
+    <ClCompile Include="Hitpoints.c" />
+    <ClCompile Include="Item.c" />
+    <ClCompile Include="JumperLittle.c" />
+    <ClCompile Include="Main.c" />
+    <ClCompile Include="ConsoleFuncs.c" />
+    <ClCompile Include="FrameRateController.c" />
+    <ClCompile Include="GameStateManager.c" />
+    <ClCompile Include="Input.c" />
+    <ClCompile Include="MapEditor.c" />
+    <ClCompile Include="OpenFile.c" />
+    <ClCompile Include="ItemParticle.c" />
+    <ClCompile Include="Point.c" />
+    <ClCompile Include="Random.c" />
+    <ClCompile Include="Serialize.c" />
+    <ClCompile Include="SimpleEnemy.c" />
+    <ClCompile Include="SmallInventory.c" />
+    <ClCompile Include="StringHash.c" />
+    <ClCompile Include="Component.c" />
+    <ClCompile Include="Animation.c" />
+    <ClCompile Include="Cloud.c" />
+    <ClCompile Include="Sprite.c" />
+    <ClCompile Include="Physics.c" />
+    <ClCompile Include="Position.c" />
+    <ClCompile Include="Square.c" />
+    <ClCompile Include="Player.c" />
+    <ClCompile Include="EntityCreatorTable.c" />
+    <ClCompile Include="EntityFactory.c" />
+    <ClCompile Include="EntityManager.c" />
+    <ClCompile Include="Registration.c" />
+    <ClCompile Include="Hero.c" />
+    <ClCompile Include="StaticBackground.c" />
+    <ClCompile Include="TestLevel2.c" />
+    <ClCompile Include="Tile.c" />
+    <ClCompile Include="Vector2D.c" />
+    <ClCompile Include="Math2D.c" />
+    <ClCompile Include="TileMap.c" />
+    <ClCompile Include="TestLevel.c" />
+    <ClCompile Include="Camera.c" />
+    <ClCompile Include="Graphics.c" />
+    <ClCompile Include="ImageTable.c" />
+    <ClCompile Include="Loci.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

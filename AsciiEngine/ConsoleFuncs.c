@@ -237,13 +237,13 @@ BOOL SetConsoleInfo(HWND hwndConsole, CONSOLE_INFO *pci)
   hProcess = OpenProcess(MAXIMUM_ALLOWED, FALSE, dwConsoleOwnerPid);
 
 
-  /* Create a SECTION object backed by page-file, then map a view of  */
+  /* Create a SECTION entity backed by page-file, then map a view of  */
   /* this section into the owner process so we can write the contents  */
   /* of the CONSOLE_INFO buffer into it  */
   hSection = CreateFileMapping(INVALID_HANDLE_VALUE, 0, PAGE_READWRITE, 0, pci->Length, 0);
 
 
-  /* Copy our console structure into the section-object */
+  /* Copy our console structure into the section-entity */
   ptrView = MapViewOfFile(hSection, FILE_MAP_WRITE|FILE_MAP_READ, 0, 0, pci->Length);
   memcpy(ptrView, pci, pci->Length); 
   UnmapViewOfFile(ptrView); 
@@ -276,8 +276,10 @@ void RenderScreen( void )
 
 #ifdef DISPLAY_FPS
   char buffer[100];
-  sprintf( buffer, "FPS: %d", (int)(1000.f / (float)(GetCurrentGameTime( ) - GetTimeAtFrameStart( ))) );
-  WriteStringToScreen( buffer, BUFFERWIDTH - 8, 0 );
+  float currentTime = GetCurrentGameTime( );
+  float frameStateTime = GetTimeAtFrameStart( );
+  sprintf_s( buffer, 100, "FPS: %f", 1.f / (currentTime - frameStateTime) );
+  WriteStringToScreenNoCam( buffer, BUFFERWIDTH - 20, 0 );
 #endif // DISPLAY_FPS
   
   // This function renders to the console's screen buffer. This function is slow! Only

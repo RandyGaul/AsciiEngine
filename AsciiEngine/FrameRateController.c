@@ -14,32 +14,52 @@
 #include "GlobalDefines.h" // DT_MAX
 #include "FrameRateController.h"
 
-millisecond previousTime;
-millisecond timeAtFrameStart;
-millisecond stateStartTime = -1;
+float previousTime;
+float timeAtFrameStart;
+float stateStartTime;
+LARGE_INTEGER FREQUENCY;
+float F_FREQUENCY = 1.0f / FPS_LIMIT; // Used to limit FPS
 int firstRun = 1; // to see if the application just started
 static float dt;
 
+//
+// SetDT
+// Purpose: Sets DT to a specific value
+//
 void SetDT( float deltaTime )
 {
   dt = deltaTime;
 }
 void dtCap( float *dt );
 
+//
+// GetDT
+// Purpose: Retrieves and caps the current DT
+//
 float GetDT( void )
 {
   dtCap( &dt );
   return dt;
 }
 
-millisecond GetTimeAtFrameStart( void )
+//
+// GetTimeAtFrameStart
+// Purpose: Retrieves the current game time at frame start in high resolution seconds
+//
+float GetTimeAtFrameStart( void )
 {
   return timeAtFrameStart;
 }
 
-millisecond GetCurrentGameTime( void )
+//
+// GetCurrentGameTime
+// Purpose: Retrieves the current game time in high resolution seconds
+//
+float GetCurrentGameTime( void )
 {
-  return (millisecond)timeGetTime( );
+  LARGE_INTEGER currentTime;
+  QueryPerformanceCounter( &currentTime );
+  return (float)(currentTime.QuadPart) / (float)(FREQUENCY.QuadPart);
 }
 
 //  
@@ -48,14 +68,14 @@ millisecond GetCurrentGameTime( void )
 // 
 void SetStateStartTime( void )
 {
-	stateStartTime = timeGetTime( );
+	stateStartTime = GetCurrentGameTime( );
 }
 
 //  
 //  Name: GetStateStartTime
 //  Purpose: Returns the recorded state start time.
 // 
-millisecond GetStateStartTime( void )
+float GetStateStartTime( void )
 {
 	return stateStartTime;
 }
@@ -66,7 +86,7 @@ millisecond GetStateStartTime( void )
 // 
 void FrameStart( void )
 {
-	timeAtFrameStart = timeGetTime( );
+	timeAtFrameStart = GetCurrentGameTime( );
 }
 
 //  
@@ -75,9 +95,9 @@ void FrameStart( void )
 // 
 float dtCalculate( )
 {
-	millisecond currentTime = (millisecond)timeGetTime(); // record current time
-	float dt = (float)(currentTime - previousTime); // calculate dt
-	previousTime = currentTime; // set previousTime for the next call
+	float currentTime = GetCurrentGameTime( );  // record current time
+	float dt = currentTime - previousTime;      // calculate dt
+	previousTime = currentTime;                 // set previousTime for the next call
 	
 	if(firstRun)
 	{
@@ -97,9 +117,9 @@ void dtCap( float *dt )
 {
 	if(dt)
 	{
-		if(*dt > DT_MAX)
+		if(*dt > F_FREQUENCY)
 		{
-			*dt = DT_MAX;
+			*dt = F_FREQUENCY;
 		}
 	}
 }
@@ -107,9 +127,9 @@ void dtCap( float *dt )
 //  
 //  Name: FPSLimit
 //  Purpose: Limit the FPS in terms of drawing to a specific speed
-//  Parameters: FPS - Amount of milliseconds to wait for
+//  Parameters: FPS - Max amount of frames per second
 // 
-int FPSLimit( millisecond FPS )
+BOOL FPSLimit( void )
 {
 	enum
 	{
@@ -117,7 +137,7 @@ int FPSLimit( millisecond FPS )
 		DRAW
 	};
 
-	if (timeGetTime( ) - timeAtFrameStart < FPS) // If we are not over our threshold
+	if (GetCurrentGameTime( ) - timeAtFrameStart < F_FREQUENCY) // If we are not over our threshold
 	{
 		return DONTDRAW;
 	}
@@ -125,4 +145,14 @@ int FPSLimit( millisecond FPS )
 	{
 		return DRAW;
 	}
+}
+
+//
+// InitFrameRateController
+// Purpose: Initializes various values for the framerate controller
+//
+RETURN_TYPE InitFrameRateController( void )
+{
+  F_FREQUENCY = (float)((int)(F_FREQUENCY * 1000.0f)) / 1000.0f;
+  return QueryPerformanceFrequency( &FREQUENCY );
 }

@@ -18,11 +18,6 @@
 #include "Shapes.h"
 #include "GlobalDefines.h"
 
-typedef struct _AE_COORD
-{
-  int x_, y_;
-} AE_COORD;
-
 //
 // StaticCircleToStaticRectangle
 // Purpose: Detects collision between a static circle and static
@@ -76,5 +71,23 @@ int FloatToIntRoundUp( float val );
 // Purpose: Snaps a floating point value to the nearest cell
 // 
 void SnapToCell( float *coordinate );
+
+//
+// BoundCheck
+// Purpose: Checks to make sure a coordinate is within a specific bound
+//
+BOOL BoundCheck( AE_COORD coord, int boundTop, int boundLeft, int boundBottom, int boundRight );
+
+//
+// BoundCheck
+// Purpose: Checks to make sure a coordinate is within a specific bound
+//
+BOOL BoundCheck2( AE_COORD coord, AE_COORD topLeft, AE_COORD bottomRight );
+
+//
+// SnapVectorToRect
+// Purpose: Snaps a point within a rectangle boundary.
+//
+void SnapVectorToRect( VECTOR2D *vec, AE_RECT *rect );
 
 #endif  MATH2DH

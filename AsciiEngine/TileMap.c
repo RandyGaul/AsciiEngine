@@ -33,6 +33,30 @@ BOOL MapBoundCheck( int x, int y )
 }
 
 //
+// DimensionClampX
+// Returns a clamped version of a coordinate
+//
+int DimensionClampX( int x )
+{
+  if(x > 0)
+    return (x > TILE_MAP_SYSTEM.MAP_WIDTH) ? TILE_MAP_SYSTEM.MAP_WIDTH : x;
+  else
+    return 0;
+}
+
+//
+// DimensionClampY
+// Returns a clamped version of a coordinate
+//
+int DimensionClampY( int y )
+{
+  if(y > 0)
+    return (y > TILE_MAP_SYSTEM.MAP_HEIGHT) ? TILE_MAP_SYSTEM.MAP_HEIGHT : y;
+  else
+    return 0;
+}
+
+//
 // CellAt
 // Purpose: Returns a pointer to the cell at a location
 //
@@ -46,118 +70,120 @@ CELL *CellAt( MAPDATA *map, int x, int y )
 }
 
 //
+// HotSpotCollisionCheck
+// Purpose: Small utility function for CheckHotspotCollision readability
+//
+BOOL HotSpotCollisionCheck( VECTOR2D hotspot )
+{
+  int x, y;
+  AE_RECT TILE = { 0 };
+  CELL *thisCell = NULL;
+  TILE.width_ = 1.f;
+  TILE.height_ = 1.f;
+
+	for(y = 0; y < TILE_MAP_SYSTEM.MAP_HEIGHT; y++)
+	{
+		for(x = 0; x < TILE_MAP_SYSTEM.MAP_WIDTH; x++)
+		{
+      thisCell = CellAt( TILE_MAP_SYSTEM.TILE_MAP, x, y );
+
+      if(*thisCell == COLLISION)
+      {
+        TILE.center_.x_ = (float)x;
+        TILE.center_.y_ = (float)y;
+        if(StaticPointToStaticRect( &hotspot, &TILE ))
+        {
+          return TRUE;
+        }
+      }
+    }
+  }
+  return FALSE;
+}
+
+//
 // CheckHotspotCollision
 // Purpose: Checks hotspots around a rectangle for collision within
 //          a the current collision array.
 //
 COLLISION_FLAG CheckHotspotCollision( const AE_RECT rect )
 {
+  char buffer[100];
 	COLLISION_FLAG flag = 0;
   VECTOR2D hotspot = { 0 };
-  CELL *thisCell = NULL;
 
 	// Left up
-  hotspot.x_ = rect.center_.x_ - rect.halfWidth_ + EPSILON;
-  hotspot.y_ = rect.center_.y_ - rect.width_ / 4.f + EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+  hotspot.x_ = rect.center_.x_ - rect.width_ / 2.f;
+  hotspot.y_ = rect.center_.y_ - rect.width_ / 4.f;
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_LEFT;
-	  }
+		flag |= COLLISION_LEFT;
   }
 
 	// Left down
-	hotspot.x_ = rect.center_.x_ - rect.halfWidth_ + EPSILON;
-  hotspot.y_ = rect.center_.y_ + rect.height_ / 4.f - EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+	hotspot.x_ = rect.center_.x_ - rect.width_ / 2.f;
+  hotspot.y_ = rect.center_.y_ + rect.height_ / 4.f;
+  sprintf_s( buffer, 100, "hotspot left down: %f, %f", hotspot.x_, hotspot.y_ );
+  WriteStringToScreen( buffer, 1, 40 );
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_LEFT;
-	  }
+		flag |= COLLISION_LEFT;
   }
 
 	// Right up
-	hotspot.x_ = rect.center_.x_ + rect.halfWidth_ - EPSILON;
-  hotspot.y_ = rect.center_.y_ - rect.height_ / 4.f + EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+	hotspot.x_ = rect.center_.x_ + rect.width_ / 2.f;
+  hotspot.y_ = rect.center_.y_ - rect.height_ / 4.f;
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_RIGHT;
-    }
+		flag |= COLLISION_RIGHT;
 	}
 
 	// Right down
-	hotspot.x_ = rect.center_.x_ + rect.halfWidth_ - EPSILON;
-	hotspot.y_ = rect.center_.y_ + rect.height_ / 4.f - EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+	hotspot.x_ = rect.center_.x_ + rect.width_ / 2.f;
+	hotspot.y_ = rect.center_.y_ + rect.height_ / 4.f;
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_RIGHT;
-    }
+		flag |= COLLISION_RIGHT;
 	}
 
 	// Up left
-  hotspot.x_ = rect.center_.x_ - rect.width_ / 4.f + EPSILON;
-  hotspot.y_ = rect.center_.y_ - rect.halfHeight_ + EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+  hotspot.x_ = rect.center_.x_ - rect.width_ / 4.f;
+  hotspot.y_ = rect.center_.y_ - rect.height_ / 2.f;
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_TOP;
-    }
+		flag |= COLLISION_TOP;
 	}
 
 	// Up Right
-	hotspot.x_ = rect.center_.x_ + rect.width_ / 4.f - EPSILON;
-	hotspot.y_ = rect.center_.y_ - rect.halfHeight_ + EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+	hotspot.x_ = rect.center_.x_ + rect.width_ / 4.f;
+	hotspot.y_ = rect.center_.y_ - rect.height_ / 2.f;
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_TOP;
-    }
+		flag |= COLLISION_TOP;
 	}
 
 	// Down left
-	hotspot.x_ = rect.center_.x_ - rect.width_ / 4.f + EPSILON;
-	hotspot.y_ = rect.center_.y_ + rect.halfHeight_ - EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+	hotspot.x_ = rect.center_.x_ - rect.width_ / 4.f;
+	hotspot.y_ = rect.center_.y_ + rect.height_ / 2.f;
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_BOTTOM;
-    }
+		flag |= COLLISION_BOTTOM;
 	}
 
 	// Down Right
-	hotspot.x_ = rect.center_.x_ + rect.width_ / 4.f - EPSILON;
-	hotspot.y_ = rect.center_.y_ + rect.halfHeight_ - EPSILON;
-  thisCell = CellAt( TILE_MAP_SYSTEM.COLLISION_MAP, FloatToInt( hotspot.x_ ), FloatToInt( hotspot.y_ ) );
+	hotspot.x_ = rect.center_.x_ + rect.width_ / 4.f;
+	hotspot.y_ = rect.center_.y_ + rect.height_ / 2.f;
 
-  if(thisCell)
+  if(HotSpotCollisionCheck( hotspot ))
   {
-	  if(*thisCell == COLLISION)
-	  {
-		  flag |= COLLISION_BOTTOM;
-    }
+		flag |= COLLISION_BOTTOM;
 	}
 
 	return flag;
@@ -178,7 +204,7 @@ RETURN_TYPE ImportMAPDATA( const char *FileName )
   int x, y;
 
   fopen_s( &fp, FileName, "rb" );
-
+  
 	if(fp)
 	{
 		// Set pointer to start of first number for width
@@ -197,7 +223,7 @@ RETURN_TYPE ImportMAPDATA( const char *FileName )
 		// Set our data pointer to point to beginning of our array
 		TILE_MAP_SYSTEM.TILE_MAP->data = (int *)PtrAdd( TILE_MAP_SYSTEM.TILE_MAP, sizeof( MAPDATA ) );
 		TILE_MAP_SYSTEM.COLLISION_MAP->data = (int *)PtrAdd( TILE_MAP_SYSTEM.COLLISION_MAP, sizeof( MAPDATA ) );
-
+    
 		// Initialize width and height components
 		TILE_MAP_SYSTEM.TILE_MAP->width = TILE_MAP_SYSTEM.MAP_WIDTH;
 		TILE_MAP_SYSTEM.TILE_MAP->height = TILE_MAP_SYSTEM.MAP_HEIGHT;
@@ -226,7 +252,7 @@ RETURN_TYPE ImportMAPDATA( const char *FileName )
         }
 			}
 		}
-
+    
 		fclose( fp );
     TILE_MAP_SYSTEM.ACTIVE = TRUE;
 		return RETURN_SUCCESS;
@@ -306,5 +332,30 @@ RETURN_TYPE DrawMap( void )
       }
     }
   }
+  return RETURN_SUCCESS;
+}
+
+RETURN_TYPE CreateTileEntitiesFromMap( void )
+{
+  int x, y;
+  CELL *thisCell = NULL;
+
+	for(y = 0; y < TILE_MAP_SYSTEM.MAP_HEIGHT; y++)
+	{
+		for(x = 0; x < TILE_MAP_SYSTEM.MAP_WIDTH; x++)
+		{
+      float xf = (float)x, yf = (float)y;
+      thisCell = CellAt( TILE_MAP_SYSTEM.TILE_MAP, x, y );
+
+      if(thisCell)
+      {
+        if(*thisCell == 1)
+        {
+          CreateEntity( "TILE", (int)&xf, (int)&yf );
+        }
+      }
+    }
+  }
+
   return RETURN_SUCCESS;
 }

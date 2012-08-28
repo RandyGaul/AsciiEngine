@@ -7,3 +7,50 @@
              -Added support for loading .AEArt files (art files created with AEIEditor)
              -Added support for loading all .AEArt files within an entire directory
              -Other minor updates
+8/27/2012 -- Version 1.02
+             -Swapped all hash tables for the generic hash table.
+             -Swapped all linked lists for the generic linked list.
+             -Recreated factory and object management, renamed to entity and entity management.
+             -Created component based entity system for ease of entity design and creation.
+               -Physics component
+                 -Euler integration
+                 -New collision scheme working from the Vector lib and Math lib
+                 -Requires position component
+               -Graphics component
+                 -Sprite component
+                   -Single 2D image
+                   -Requires position component
+                 -Animation component
+                   -Single 2D animation
+                   -Requires position component
+                 -Cloud component
+                   -Collection of sprites and/or animations.
+                   -Each sprite or animation in the cloud has a coordinate and corresponding
+                    string name.
+                   -Each sprite or animation is a Zorder for ordered drawing.
+                   -All coordinate positions are relative to a single point: this point is
+                    retrieved from the position component.
+               -Position component
+                 -X and Y floats stored in Vector format
+               -Player component
+                 -Allows user input to affect the state of other components.
+                 -Requires position and physics component
+               -Inventory component
+                 -Allows object to store arrays of Item entities within it
+               -Hitpoints component
+                 -Integer HP represenation
+                 -Utility functions for reducing HP
+                 -Ability to send destroy message to owning entity on HP zero
+                 -Functionality to autmotically create in-game text reprentation of HP changes
+               -Collision component
+                 -Handles detection of collisions, and resolutions of collisions with other entities.
+               -Brain component
+                 -Creates actions to insert into the action list component, depending on context
+                  the owning entity is currently within.
+                 -Requires action list component
+               -Actionlist Component
+                 -Simple and elegant all-purpose queue for storing actions for the entity to perform.
+               -Began work on example map editor.
+               -Created simple serialization/deserialization functions for entities.
+             -Recreated the demo.
+             -Craeted button class for easy UI creation.
